@@ -20,4 +20,6 @@ from quickmatch import views # NEW
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', views.hello_world), # NEW
+    # http://127.0.0.1:8000/ksiazki
+    path("matches", views.list_matches), # NEW
 ]
