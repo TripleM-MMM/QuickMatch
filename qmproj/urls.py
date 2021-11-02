@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from quickmatch import views # NEW
+from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello/', views.hello_world), # NEW
     # http://127.0.0.1:8000/ksiazki
-    path("matches", views.list_matches), # NEW
+    path("matches/", views.list_matches), # NEW
+    path('accounts/', include('django.contrib.auth.urls')), # NEW
+    path('accounts/profile/', views.profile_view, name='user_profile'), # NEW
+    path('accounts/signup/', views.user_signup, name="user_signup"), # NEW
 ]
