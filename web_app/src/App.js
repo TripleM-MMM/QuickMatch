@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Matches from './components/Matches';
+import Pitches from './components/Pitches';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
@@ -16,6 +17,9 @@ function App() {
         </Route>
         <Route exact path='/matches'>
           <Matches />
+        </Route>
+        <Route exact path='/pitches'>
+          <Pitches />
         </Route>
       </Switch>
     </Router>

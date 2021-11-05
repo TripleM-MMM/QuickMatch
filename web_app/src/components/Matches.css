@@ -1,3 +1,8 @@
+.matches {
+    margin: auto;
+    text-align: center;
+}
+
 .matches h1 {
     margin: auto;
     text-align: center;
@@ -8,17 +13,11 @@
     background: tomato;
 }
 
-
-.matches .header {
-    margin: auto;
-    text-align: center;
-    padding: 10px;
-    border-radius: 16px;
-    width: 700px;
-    border: 0;
-    background: tomato;
+.matches .list {
+    margin-top: 50px;
 }
 
+/* 
 .matches a {
     margin-left: 16px;
     text-decoration: none;
@@ -28,5 +27,5 @@
     border-radius: 16px;
     border: 0;
     background: rgb(107, 100, 98);
-  }
+  } */
 

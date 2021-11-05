@@ -1,26 +1,18 @@
 import './Matches.css'
-import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react'
+import MatchesList from './MatchesList';
+import useFetch from './useFetch';
 
 function Matches() {
-    const [matches, setmatches] = useState(null)
-
-    useEffect(() => {
-        fetch('http://localhost:8000/matches')
-            .then(res=>{
-                return res.json();
-            })
-            .then(data=> {
-                setmatches(data);
-            })
-    }, [])
+    const {data: matches} = useFetch('http://localhost:8000/matches')
 
     return(
         <div className="matches">
             <h1>
                 Mecze w twojej okolicy
             </h1>
-            
+            <div className="list">
+            { matches && <MatchesList matches={matches} />}
+            </div>
         </div>
     );
 }

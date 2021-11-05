@@ -1,4 +1,6 @@
-function MatchesList( {matches, title} ) {
+import './MatchesList.css'
+
+function MatchesList( {matches} ) {
     return(
         <div className='matches-list'>
             {matches.map((match) => (
