@@ -1,0 +1,32 @@
+.matches h1 {
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    border-radius: 16px;
+    width: 700px;
+    border: 0;
+    background: tomato;
+}
+
+
+.matches .header {
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    border-radius: 16px;
+    width: 700px;
+    border: 0;
+    background: tomato;
+}
+
+.matches a {
+    margin-left: 16px;
+    text-decoration: none;
+    padding: 6px;
+    margin-top: 40px;
+    padding: 10px;
+    border-radius: 16px;
+    border: 0;
+    background: rgb(107, 100, 98);
+  }
+
