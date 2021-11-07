@@ -6,7 +6,7 @@ function MatchesList( {matches} ) {
             {matches.map((match) => (
                 <div className='match-preview' key={match.id}>
                     <h2> { match.place } </h2>
-                        <p>Cena {match.price}</p>
+                        <p>Cena: {match.price}</p>
                 </div>
             ))}
         </div>
