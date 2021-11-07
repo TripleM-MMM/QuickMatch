@@ -2,7 +2,7 @@ import './Create.css'
 import {useState} from 'react';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import TimePicker from 'react-time-picker'
+import {useHistory } from 'react-router-dom'
 
 
 function Create() {
@@ -11,11 +11,12 @@ const [price, setPrice] = useState('')
 const [organizer, setOrganizer] = useState('Jan abab')
 const [number, setNumber] = useState('')
 const [date, setDate] = useState(null)
-const [time, setTime] = useState(null)
+
+const history = useHistory()
 
 const handleSubmit = (e) => {
     e.preventDefault();
-    const match = {place, price, organizer, date, time};
+    const match = {place, price, organizer, date};
 
     fetch('http://localhost:8000/matches',  {
         method: 'POST',
@@ -23,6 +24,7 @@ const handleSubmit = (e) => {
         body: JSON.stringify(match) 
     }).then( () => {
         console.log('new match added');
+        history.go(-1);
     })
 }
 
@@ -46,13 +48,12 @@ const handleSubmit = (e) => {
                     onChange={(e) => setPrice(e.target.value)}
                 />
                 <label>Data: </label>
-                <DatePicker selected={date} onChange={date => setDate(date)}/>
-                <label>Godzina: </label>
-                <input
-                    type="text"
-                    required
-                    value={time}
-                    onChange={(e) => setTime(e.target.value)}
+                <DatePicker 
+                    selected={date} 
+                    onChange={(date) => setDate(date)}
+                    timeInputLabel="Time:"
+                    dateFormat="MM/dd/yyyy h:mm aa"
+                    showTimeInput
                 />
                 <label>Liczba osób: </label>
                 <input
