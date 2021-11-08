@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse # NEW
 from quickmatch.models import Match
 from django.contrib.auth.forms import UserCreationForm
+from rest_framework import viewsets
+from .serializers import MatchSerializer
 
 # Create your views here.
 def hello_world(request): # NEW
@@ -32,3 +34,8 @@ def user_signup(request):
 
 def user_signout(request):
     return render(request, template_name="registration/logged_out.html")
+
+# NEW - for React.js
+class MatchView(viewsets.ModelViewSet):
+    serializer_class = MatchSerializer
+    queryset = Match.objects.all()
