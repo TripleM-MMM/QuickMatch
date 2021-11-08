@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse # NEW
 from quickmatch.models import Match
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from rest_framework import viewsets
-from .serializers import MatchSerializer
+from rest_framework import viewsets, generics
+from .serializers import MatchSerializer, UserSerializer
 
 # Create your views here.
 def hello_world(request): # NEW
@@ -39,3 +40,7 @@ def user_signout(request):
 class MatchView(viewsets.ModelViewSet):
     serializer_class = MatchSerializer
     queryset = Match.objects.all()
+
+class UserView(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()

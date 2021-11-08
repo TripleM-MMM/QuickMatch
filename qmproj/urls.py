@@ -22,6 +22,7 @@ from quickmatch import views
 
 router = routers.DefaultRouter()
 router.register(r'matches', views.MatchView, 'match')
+router.register(r'users', views.UserView, 'user')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
