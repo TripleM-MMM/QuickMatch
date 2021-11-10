@@ -3,6 +3,7 @@ import {useState} from 'react';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import {useHistory } from 'react-router-dom'
+import axios from 'axios';
 
 
 function Create() {
@@ -18,14 +19,22 @@ const handleSubmit = (e) => {
     e.preventDefault();
     const match = {place, price, organizer, date};
 
-    fetch('http://localhost:8000/matches',  {
-        method: 'POST',
-        headers: { "Content-type": "application/json"},
-        body: JSON.stringify(match) 
-    }).then( () => {
-        console.log('new match added');
-        history.go(-1);
+    // fetch('http://localhost:8000/matches',  {
+    //     method: 'POST',
+    //     headers: { "Content-type": "application/json"},
+    //     body: JSON.stringify(match) 
+    // }).then( () => {
+    //     console.log('new match added');
+    //     history.go(-1);
+    // })
+    axios.post("/api/matches/", {
+        id: 2,
+        title: "Polska-asd",
+        short_description: "Mistrzostwa Amatorów Półkolonii Letniskowej",
+        date: "2021-11-23T19:20:00Z"
     })
+    .then(res=>{console.log(res)})
+    
 }
 
     return (
