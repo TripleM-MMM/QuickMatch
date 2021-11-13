@@ -5,6 +5,10 @@ import Matches from './components/Matches';
 import Pitches from './components/Pitches';
 import Create from './components/Create';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
+
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 
 function App() {
