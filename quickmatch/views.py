@@ -1,3 +1,5 @@
+import os
+from django.http.response import HttpResponseNotFound
 from django.shortcuts import render
 from django.http import HttpResponse # NEW
 from quickmatch.models import Match
@@ -5,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from rest_framework import viewsets, generics
 from .serializers import MatchSerializer, UserSerializer
+from django.views import View
 
 # Create your views here.
 def hello_world(request): # NEW
@@ -44,3 +47,14 @@ class MatchView(viewsets.ModelViewSet):
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
+
+class Assets(View):
+
+    def get(self, _request, filename):
+        path = os.path.join(os.path.dirname(__file__), 'static', filename)
+
+        if os.path.isfile(path):
+            with open(path, 'rb') as file:
+                return HttpResponse(file.read(), content_type='application/javascript')
+        else:
+            return HttpResponseNotFound()
