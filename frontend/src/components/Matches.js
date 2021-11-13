@@ -1,10 +1,11 @@
+
 import { Link } from 'react-router-dom';
 import './Matches.css'
 import MatchesList from './MatchesList';
 import useFetch from './useFetch';
 
 function Matches() {
-    const {data: matches} = useFetch('http://localhost:8000/matches')
+    const {data: matches} = useFetch("/api/matches/")
 
     return(
         <div className="all">
