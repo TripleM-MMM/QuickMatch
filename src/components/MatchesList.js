@@ -13,7 +13,7 @@ function MatchesList( {matches} ) {
                         {/* <p>Cena: {match.price}</p>
                         <p>Data: {match.date.slice(0,10)}</p> */}
                         <p>{match.short_description}</p> 
-                        <p>{ match.date }</p>
+                        {/* <p>{ match.date }</p> */}
                 </div>
             ))}
         </div>
