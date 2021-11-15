@@ -33,7 +33,9 @@ const handleSubmit = (e) => {
         short_description: "Mistrzostwa Amatorów Półkolonii Letniskowej",
         date: "2021-11-23T19:20:00Z"
     })
-    .then(res=>{console.log(res)})
+    .then(res=>{
+        console.log(res);
+        history.go(-1)})
     
 }
 

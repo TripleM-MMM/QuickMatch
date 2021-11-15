@@ -19,6 +19,7 @@ from quickmatch import views # NEW
 from django.urls import include
 from rest_framework import routers
 from quickmatch import views
+from django.views.generic import TemplateView
 
 router = routers.DefaultRouter()
 router.register(r'matches', views.MatchView, 'match')
@@ -33,4 +34,5 @@ urlpatterns = [
     path('accounts/profile/', views.profile_view, name='user_profile'), # NEW
     path('accounts/signup/', views.user_signup, name="user_signup"), # NEW
     path('api/', include(router.urls)),
+    path('', TemplateView.as_view(template_name='index.html'))
 ]

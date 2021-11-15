@@ -1,3 +1,4 @@
+import os
 import django_heroku
 """
 Django settings for qmproj project.
@@ -59,7 +60,9 @@ ROOT_URLCONF = 'qmproj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'build'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,4 +137,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
+]
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'build/static'),
+    os.path.join(BASE_DIR, 'build')
 ]
