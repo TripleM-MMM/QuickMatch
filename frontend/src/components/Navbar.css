@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+/* base styles */
+* {
+  margin: 0;
+  font-family: "Quicksand";
+  color: #333;
+}
+
+.navbar {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    max-height: 20px;
+    margin: 0 auto;
+    /* position: absolute; */
+    /* border-bottom: 1px solid #f2f2f2; */
+    background-color: black;
+    /* width: 100%; */
+  }
+
+
+.navbar .login {
+    margin-left: auto;
+}
+
+.navbar button {
+    font-size: large;
+    background: #f1356d;
+    color: #fff;
+    border: 0;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .navbar a {
+    color: white;
+    margin-left: 16px;
+    text-decoration: none;
+    padding: 6px;
+  }
+  .navbar a:hover {
+    color: #f1356d;
+  }
+
+  .navbar img{
+      height: 50px;
+  }
