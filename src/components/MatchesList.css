@@ -14,3 +14,7 @@
     color: red;
     margin-bottom: 8px;
 }
+
+.match-preview a {
+    text-decoration: none;
+}
