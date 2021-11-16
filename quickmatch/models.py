@@ -1,3 +1,5 @@
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.fields import proxy
@@ -19,7 +21,19 @@ class Pitch(models.Model):
     photo_url = models.CharField(max_length=100)
 
 class MyUser(User):
-    class Meta:
-        proxy = True
-    
+    models.OneToOneField(User, on_delete=models.CASCADE)
     user_matches = models.CharField(max_length=100)
+
+
+class MyUserInline(admin.StackedInline):
+    model = MyUser
+    can_delete = False
+    verbose_name_plural = 'user'
+
+# Define a new User admin
+class UserAdmin(BaseUserAdmin):
+    inlines = (MyUserInline,)
+
+# Re-register UserAdmin
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
