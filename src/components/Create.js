@@ -7,19 +7,19 @@ import axios from 'axios';
 
 
 function Create() {
-const [place, setPlace] = useState('MS AGH')
-const [price, setPrice] = useState('')
-const [organizer, setOrganizer] = useState('Jan abab')
-const [date, setDate] = useState(null)
-const [description, setDescription] = useState('')
-const [signedPlayers, setSignedPlayers] = useState(0)
-const [maxPlayers, setMaxPlayers] = useState(0)
+    const [place, setPlace] = useState('MS AGH')
+    const [price, setPrice] = useState('')
+    const [organizer, setOrganizer] = useState('Jan abab')
+    const [date, setDate] = useState(null)
+    const [description, setDescription] = useState('')
+    const [signedPlayers, setSignedPlayers] = useState(0)
+    const [maxPlayers, setMaxPlayers] = useState(0)
 
-const history = useHistory()
+    const history = useHistory()
 
-const handleSubmit = (e) => {
-    e.preventDefault();
-    const match = {place, price, organizer, date, description, signedPlayers, maxPlayers};
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const match = {place, price, organizer, date, description, signedPlayers, maxPlayers};
 
     // fetch('http://localhost:8000/matches',  {
     //     method: 'POST',
@@ -31,12 +31,12 @@ const handleSubmit = (e) => {
     // })
 
 
-    axios.post("/api/matches/", match)
-    .then(res=>{
-        console.log(res);
-        history.go(-1)})
+        axios.post("/api/matches/", match)
+        .then(res=>{
+            console.log(res);
+            history.go(-1)})
     
-}
+    }
 
     return (
         <div className="create">
