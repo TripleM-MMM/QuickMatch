@@ -7,15 +7,15 @@ function MatchesList( {matches} ) {
             {matches.map((match) => (
                 <div className='match-preview' key={match.id}>
                     <Link to={`/matches/${match.id}`}>
-                    {/* <h2> { match.place } </h2>
+                    <h2> { match.place } </h2>
                         <p>Cena: {match.price}</p>
                         <p>Data: {match.date.slice(0,10)}</p>
-                        <p>Godzina : {match.date.slice(11,16)}</p> */}
-                        <h2> { match.title } </h2>
-                        {/* <p>Cena: {match.price}</p>
-                        <p>Data: {match.date.slice(0,10)}</p> */}
-                        <p>{match.short_description}</p> 
-                        <p>{ match.date }</p>
+                        <p>Godzina : {match.date.slice(11,16)}</p>
+                        <p>Cena: {match.price}</p>
+                        <p>Data: {match.date.slice(0,10)}</p>
+                        <p>{match.description}</p> 
+                        <p> {match.signed_players}</p>
+                        <p> {match.max_players } </p>
                     </Link>
                 </div>
             ))}

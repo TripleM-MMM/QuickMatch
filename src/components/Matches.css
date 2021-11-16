@@ -3,7 +3,7 @@
     text-align: center;
     padding: 10px;
     border-radius: 16px;
-    width: 700px;
+    width: 1000px;
     border: 0;
     background: tomato;
 }
@@ -34,7 +34,7 @@
 .all {
     height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 5fr;
     grid-template-rows: 1fr;
 }
 
