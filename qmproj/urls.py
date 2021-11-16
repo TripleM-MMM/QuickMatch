@@ -34,5 +34,5 @@ urlpatterns = [
     path('accounts/profile/', views.profile_view, name='user_profile'), # NEW
     path('accounts/signup/', views.user_signup, name="user_signup"), # NEW
     path('api/', include(router.urls)),
-    path('', TemplateView.as_view(template_name='index.html'))
+    # path('', TemplateView.as_view(template_name='index.html'))
 ]
