@@ -10,14 +10,16 @@ function Create() {
 const [place, setPlace] = useState('MS AGH')
 const [price, setPrice] = useState('')
 const [organizer, setOrganizer] = useState('Jan abab')
-const [number, setNumber] = useState('')
 const [date, setDate] = useState(null)
+const [description, setDescription] = useState('')
+const [signedPlayers, setSignedPlayers] = useState(0)
+const [maxPlayers, setMaxPlayers] = useState(0)
 
 const history = useHistory()
 
 const handleSubmit = (e) => {
     e.preventDefault();
-    const match = {place, price, organizer, date};
+    const match = {place, price, organizer, date, description, signedPlayers, maxPlayers};
 
     // fetch('http://localhost:8000/matches',  {
     //     method: 'POST',
@@ -27,12 +29,9 @@ const handleSubmit = (e) => {
     //     console.log('new match added');
     //     history.go(-1);
     // })
-    axios.post("/api/matches/", {
-        id: 2,
-        title: "Polska-asd",
-        short_description: "Mistrzostwa Amatorów Półkolonii Letniskowej",
-        date: "2021-11-23T19:20:00Z"
-    })
+
+
+    axios.post("/api/matches/", match)
     .then(res=>{
         console.log(res);
         history.go(-1)})
@@ -45,6 +44,7 @@ const handleSubmit = (e) => {
             <form onSubmit={handleSubmit}>
                 <label>Miejsce: </label>
                 <select
+                    required
                     value={place}
                     onChange={(e) => setPlace(e.target.value)}
                 >
@@ -60,18 +60,25 @@ const handleSubmit = (e) => {
                 />
                 <label>Data: </label>
                 <DatePicker 
+                    required
                     selected={date} 
                     onChange={(date) => setDate(date)}
                     timeInputLabel="Time:"
                     dateFormat="MM/dd/yyyy h:mm aa"
                     showTimeInput
                 />
+                <label>Opis: </label>
+                <textarea
+                    required
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
                 <label>Liczba osób: </label>
                 <input
                     type="text"
                     required
-                    value={number}
-                    onChange={(e) => setNumber(e.target.value)}
+                    value={maxPlayers}
+                    onChange={(e) => setMaxPlayers(e.target.value)}
                 />
                 <button>Dodaj wydarzenie</button>
             </form>
