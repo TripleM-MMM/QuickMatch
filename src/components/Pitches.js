@@ -3,7 +3,7 @@ import PitchesList from './PitchesList';
 import useFetch from './useFetch';
 
 function Pitches() {
-    const {data: pitches} = useFetch('http://localhost:8000/pitches')
+    const {data: pitches} = useFetch('/api/pitches')
 
     return(
         <div className="matches">
