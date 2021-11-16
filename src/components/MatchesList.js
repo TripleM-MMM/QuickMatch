@@ -8,14 +8,19 @@ function MatchesList( {matches} ) {
                 <div className='match-preview' key={match.id}>
                     <Link to={`/matches/${match.id}`}>
                     <h2> { match.place } </h2>
-                        <p>Cena: {match.price}</p>
-                        <p>Data: {match.date.slice(0,10)}</p>
-                        <p>Godzina : {match.date.slice(11,16)}</p>
-                        <p>Cena: {match.price}</p>
-                        <p>Data: {match.date.slice(0,10)}</p>
-                        <p>{match.description}</p> 
-                        <p> {match.signed_players}</p>
-                        <p> {match.max_players } </p>
+                        <div class="column">
+                            <p>Cena: {match.price}</p>
+                            <p>Data: {match.date.slice(0,10)}</p>
+                            <p>Godzina : {match.date.slice(11,16)}</p>
+                        </div>
+                        <div class="column">
+                            <p>Cena: {match.price}</p>
+                            <p>Opis meczu: {match.description}</p> 
+                        </div>
+                        <div class="column">
+                            <p>Liczba zapisanych: {match.signed_players}</p>
+                            <p>Liczba osób: {match.max_players } </p>
+                        </div>
                     </Link>
                 </div>
             ))}
