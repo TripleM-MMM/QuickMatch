@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse # NEW
-from quickmatch.models import Match
+from quickmatch.models import Match, MyUser, Pitch
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from rest_framework import viewsets, generics
-from .serializers import MatchSerializer, UserSerializer
+from .serializers import MatchSerializer, MyUserSerializer, PitchSerializer
 
 # Create your views here.
 def hello_world(request): # NEW
@@ -41,6 +41,11 @@ class MatchView(viewsets.ModelViewSet):
     serializer_class = MatchSerializer
     queryset = Match.objects.all()
 
-class UserView(viewsets.ModelViewSet):
-    serializer_class = UserSerializer
-    queryset = User.objects.all()
+
+class PitchView(viewsets.ModelViewSet):
+    serializer_class = PitchSerializer
+    queryset = Pitch.objects.all()
+
+class MyUserView(viewsets.ModelViewSet):
+    serializer_class = MyUserSerializer
+    queryset = MyUser.objects.all()

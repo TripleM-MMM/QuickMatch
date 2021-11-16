@@ -23,7 +23,8 @@ from django.views.generic import TemplateView
 
 router = routers.DefaultRouter()
 router.register(r'matches', views.MatchView, 'match')
-router.register(r'users', views.UserView, 'user')
+router.register(r'users', views.MyUserView, 'user')
+router.register(r'pitches', views.PitchView, 'pitch')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
