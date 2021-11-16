@@ -140,6 +140,6 @@ CORS_ORIGIN_WHITELIST = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'build/static'),
-    os.path.join(BASE_DIR, 'build')
+    os.path.join(BASE_DIR, 'build/static')
+
 ]
