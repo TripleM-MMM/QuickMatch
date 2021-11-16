@@ -7,12 +7,12 @@ from django.db.models.fields import proxy
 # Create your models here.
 class Match(models.Model):
     place = models.CharField(max_length=100)
-    price = models.IntegerField
-    organizer = models.IntegerField # id of organizer
-    date = models.DateTimeField()
+    price = models.CharField(max_length=100, blank=True)
+    organizer = models.CharField(max_length=100, blank=True) # id of organizer
+    date = models.DateTimeField(blank=True)
     description = models.TextField()
-    signed_players = models.IntegerField
-    max_players = models.IntegerField
+    signed_players = models.CharField(max_length=100, blank=True)
+    max_players = models.CharField(max_length=100, default=4)
 
 class Pitch(models.Model):
     name = models.CharField(max_length=100)
@@ -33,7 +33,3 @@ class MyUserInline(admin.StackedInline):
 # Define a new User admin
 class UserAdmin(BaseUserAdmin):
     inlines = (MyUserInline,)
-
-# Re-register UserAdmin
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
