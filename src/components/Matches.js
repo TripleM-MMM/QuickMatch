@@ -5,7 +5,7 @@ import MatchesList from './MatchesList';
 import useFetch from './useFetch';
 
 function Matches() {
-    const {data: matches} = useFetch("/api/matches/")
+    const {data: matches } = useFetch("/api/matches/")
 
     return(
         <div className="all">
