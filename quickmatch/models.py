@@ -18,7 +18,7 @@ class Pitch(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     contact = models.CharField(max_length=100)
-    photo_url = models.CharField(max_length=100)
+    photo_url = models.CharField(max_length=500)
 
 class MyUser(User):
     models.OneToOneField(User, on_delete=models.CASCADE)
