@@ -1,11 +1,13 @@
 import { useParams } from "react-router-dom";
 import useFetch from './useFetch';
+import { useState } from "react";
 import axios from 'axios';
 import {useHistory } from 'react-router-dom';
 
 const MatchDetails = () => {
     const { id } = useParams();
-    const {data: matches} = useFetch("/api/matches/" + id);
+    const {data: match} = useFetch("/api/matches/" + id);
+    const {data: pitch} = useFetch("/api/pitches/" + 1);
     const history = useHistory();
 
     const handleDelete = () => {
@@ -15,7 +17,26 @@ const MatchDetails = () => {
     }
 
     return (
-        <button onClick={handleDelete}>Usuń wydarzenie</button>
+        <div className="match_details" >
+            <div className="row">
+                <div className="column">
+                    <h1>Lokalizacja</h1>
+                    <h2> { pitch && pitch.name } </h2>
+                    <p>Adres: {pitch && pitch.address}</p>
+                    <p>Kontakt: {pitch && pitch.contact}</p>
+                </div>
+                <div className="column">
+                    <h1>Informacja o wydarzeniu</h1>
+                    <p>{match && match.description}</p>
+                    <p>Data: {match && match.date.slice(0,10)}</p>
+                    <p>Godzina : {match && match.date.slice(11,16)}</p>
+                    <p>Liczba uczestników: {match && match.signed_players}/{match && match.max_players}</p>
+                    <p>Organizator: {match && match.organizer}</p>
+                </div>
+            </div>
+            <button onClick={handleDelete}>Dołącz do wydarzenia</button>
+            <button onClick={handleDelete}>Usuń wydarzenie</button>
+        </div>
     )
 
 }
