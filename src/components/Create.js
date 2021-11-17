@@ -12,14 +12,14 @@ function Create() {
     const [organizer, setOrganizer] = useState('Jan abab')
     const [date, setDate] = useState(null)
     const [description, setDescription] = useState('')
-    const [signedPlayers, setSignedPlayers] = useState(0)
-    const [maxPlayers, setMaxPlayers] = useState(0)
+    const [signed_players, setSigned_players] = useState('0')
+    const [max_players, setMax_players] = useState('1')
 
     const history = useHistory()
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const match = {place, price, organizer, date, description, signedPlayers, maxPlayers};
+        const match = {place, price, organizer, date, description, signed_players, max_players};
 
     // fetch('http://localhost:8000/matches',  {
     //     method: 'POST',
@@ -77,8 +77,8 @@ function Create() {
                 <input
                     type="text"
                     required
-                    value={maxPlayers}
-                    onChange={(e) => setMaxPlayers(e.target.value)}
+                    value={max_players}
+                    onChange={(e) => setMax_players(e.target.value)}
                 />
                 <button>Dodaj wydarzenie</button>
             </form>

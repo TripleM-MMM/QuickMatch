@@ -17,9 +17,9 @@ function MatchesList( {matches} ) {
                             <p>Cena: {match.price}</p>
                             <p>Opis meczu: {match.description}</p> 
                         </div>
-                        <div class="column">
-                            <p>Liczba zapisanych: {match.signed_players}</p>
-                            <p>Liczba osób: {match.max_players } </p>
+                        <div class="column" style={{backgroundColor: 'grey'}}>
+                            <p>Liczba zapisanych: </p>
+                            <p>{match.signed_players}/{match.max_players } </p>
                         </div>
                     </Link>
                 </div>
