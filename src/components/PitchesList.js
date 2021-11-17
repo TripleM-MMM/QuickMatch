@@ -1,4 +1,4 @@
-import './MatchesList.css'
+import './PitchesList.css'
 
 function PitchesList( {pitches} ) {
     return(
@@ -6,6 +6,7 @@ function PitchesList( {pitches} ) {
             {pitches.map((pitches) => (
                 <div className='pitch-preview' key={pitches.id}>
                     <h2> { pitches.name } </h2>
+                        <img src={pitches.photo_url} align="left"/>
                         <p>Adres: {pitches.address}</p>
                         <p>Kontakt: {pitches.contact}</p>
                 </div>
