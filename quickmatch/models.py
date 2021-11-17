@@ -6,7 +6,7 @@ from django.db.models.fields import proxy
 
 # Create your models here.
 class Match(models.Model):
-    place = models.CharField(max_length=100)
+    pitch_id = models.CharField(max_length=100)
     price = models.CharField(max_length=100, blank=True)
     organizer = models.CharField(max_length=100, blank=True) # id of organizer
     date = models.DateTimeField(blank=True)
