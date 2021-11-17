@@ -8,14 +8,9 @@ const useFetch = (url) => {
         axios.get(url)
             .then((res)=>{
                 setData(res.data);
-                console.log(data);
             })
-            // .then(data=> {
-            //     setData(data);
-            // })
     }, [url])
 
-    console.log(data);
   return { data };
 }
 
