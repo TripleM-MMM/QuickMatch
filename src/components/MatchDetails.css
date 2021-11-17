@@ -1,9 +1,9 @@
-.columns {
+.column1 {
     float: left;
     width: 50%;
 }
 
-.row:after {
+.row1:after {
     content: "";
     display: table;
     clear: both;
