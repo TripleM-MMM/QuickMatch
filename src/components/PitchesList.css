@@ -1,5 +1,16 @@
 .pitch-preview img {
-    height: 100px;
-    width: 100px;
-    margin-left: auto;
+    width: 30%;
+    height: 30%;
+    margin-left: 10px;
+}
+
+.pitches-list {
+    border-bottom: 1px solid black;
+    margin: auto;
+    width: 900px;
+    height: 220px;
+}
+
+.pitches-list .info {
+    margin-top: 60px;
 }

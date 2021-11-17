@@ -7,8 +7,10 @@ function PitchesList( {pitches} ) {
                 <div className='pitch-preview' key={pitches.id}>
                     <h2> { pitches.name } </h2>
                         <img src={pitches.photo_url} align="left"/>
-                        <p>Adres: {pitches.address}</p>
-                        <p>Kontakt: {pitches.contact}</p>
+                        <div className="info">
+                            <p>Adres: {pitches.address}</p>
+                            <p>Kontakt: {pitches.contact}</p>
+                        </div>
                 </div>
             ))}
         </div>
