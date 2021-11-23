@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 function Create() {
-    const [place, setPlace] = useState('MS AGH')
+    const [pitch_id, setPlace] = useState('MS AGH')
     const [price, setPrice] = useState('')
     const [organizer, setOrganizer] = useState('Jan abab')
     const [date, setDate] = useState(null)
@@ -19,7 +19,7 @@ function Create() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const match = {place, price, organizer, date, description, signed_players, max_players};
+        const match = {pitch_id, price, organizer, date, description, signed_players, max_players};
 
     // fetch('http://localhost:8000/matches',  {
     //     method: 'POST',
@@ -45,7 +45,7 @@ function Create() {
                 <label>Miejsce: </label>
                 <select
                     required
-                    value={place}
+                    value={pitch_id}
                     onChange={(e) => setPlace(e.target.value)}
                 >
                     <option value="MS AGH">MS AGH</option>
