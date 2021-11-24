@@ -18,4 +18,4 @@ class PitchSerializer(serializers.ModelSerializer):
 class MyUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyUser
-        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'user_matches')
+        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'password', 'user_matches')
