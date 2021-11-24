@@ -1,0 +1,62 @@
+
+.login {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .login label {
+    position: relative;
+    bottom: -20px;
+    right: 0px;
+    color: rgb(0, 0, 0);
+
+    text-align: left;
+    display: block;
+  }
+  .login h2 {
+    position: relative;
+    bottom: -20px;
+    right: 0px;
+
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    width: 350px;
+    border: 0;
+    background: rgb(196, 129, 216);
+  }
+  .login input, .login select, .login textarea{
+    position: relative;
+    bottom: -20px;
+    right: 0px;
+
+    width: 100%;
+    padding: 6px 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    display: block;
+  }
+  .login button {
+    position: relative;
+    bottom: -20px;
+    right: 0px;
+
+    width: 100%;
+    background: #c98be6;
+    color: #fff;
+    border: 0;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .login img{
+    filter: grayscale(100%);
+    left: 0px;
+    object-fit: cover;  
+    width: 100%;
+    height: 100%;
+    position: fixed;  
+}

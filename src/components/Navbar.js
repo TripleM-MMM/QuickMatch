@@ -15,7 +15,7 @@ function Navbar() {
                 <Link to='/contact'>Kontakt</Link>  
             </div>
             <div className='login'>
-                <button to='/login'>Zaloguj się</button>
+                <Link to='/login'>Zarejestruj się</Link>
             </div>
         </nav>
     )

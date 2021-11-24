@@ -20,8 +20,16 @@
   }
 
 
-.navbar .login {
-    margin-left: auto;
+  .navbar .login {
+    margin-right: 0px;
+    
+    font-size: large;
+    background: #f1356d;
+    color: #fff;
+    border: 0;
+    padding: 7px;
+    border-radius: 7px;
+    cursor: pointer;
 }
 
 .navbar button {
