@@ -7,6 +7,7 @@ import Create from './components/Create';
 import MatchDetails from './components/MatchDetails';
 import Login from './components/Login';
 import Contact from './components/Contact'
+import Profile from './components/Profile';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
@@ -31,11 +32,14 @@ function App() {
         <Route exact path='/create_match'>
           <Create />
         </Route>
-        <Route exact path='/Login'>
+        <Route exact path='/login'>
           <Login />
         </Route>
-        <Route exact path='/Contact'>
+        <Route exact path='/contact'>
           <Contact />
+        </Route>
+        <Route exact path='/profile'>
+          <Profile />
         </Route>
       </Switch>
     </Router>

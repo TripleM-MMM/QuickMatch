@@ -43,8 +43,8 @@ function Login() {
         <div className="login"> 
 
 <           div className="img">
-            <img src="/static/background_.jpg"/>
-                </div> 
+                <img src="/static/background_.jpg"/>
+            </div> 
 
             <h2>Rejestracja do QuickMatch</h2>
             <form onSubmit={handleSubmit}>
