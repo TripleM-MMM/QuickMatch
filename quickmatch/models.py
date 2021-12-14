@@ -6,13 +6,21 @@ from django.db.models.fields import proxy
 
 # Create your models here.
 class Match(models.Model):
-    pitch_id = models.CharField(max_length=100)
+    pitch = models.ForeignKey(to="Pitch", on_delete=models.DO_NOTHING)
     price = models.CharField(max_length=100, blank=True)
-    organizer = models.CharField(max_length=100, blank=True) # id of organizer
+    organizer = models.ForeignKey(to="MyUser", on_delete=models.DO_NOTHING) # id of organizer
     date = models.DateTimeField(blank=True)
     description = models.TextField()
     signed_players = models.CharField(max_length=100, blank=True)
     max_players = models.CharField(max_length=100, default=4)
+
+    class Meta:
+        ordering = ["date", "pitch_id"]
+        verbose_name = "Match"
+        verbose_name_plural = "Matches"
+
+    def __str__(self):
+        return "Match: " + self.date + " " + self.pitch
 
 class Pitch(models.Model):
     name = models.CharField(max_length=100)
@@ -20,9 +28,17 @@ class Pitch(models.Model):
     contact = models.CharField(max_length=100)
     photo_url = models.CharField(max_length=500)
 
+    class Meta:
+        ordering = ["name", "address"]
+        verbose_name = "Pitch"
+        verbose_name_plural = "Pitches"
+
+    def __str__(self):
+        return "Pitch: " + self.name
+
 class MyUser(User):
     models.OneToOneField(User, on_delete=models.CASCADE)
-    user_matches = models.CharField(max_length=100)
+    user_matches = models.CharField(max_length=100, blank=True)
 
 
 class MyUserInline(admin.StackedInline):
