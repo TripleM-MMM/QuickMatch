@@ -38,7 +38,7 @@ class Pitch(models.Model):
 
 class MyUser(User):
     models.OneToOneField(User, on_delete=models.CASCADE)
-    user_matches = models.CharField(max_length=100, blank=True)
+    user_matches = models.ManyToManyField(Match, blank=True)
 
 
 class MyUserInline(admin.StackedInline):
