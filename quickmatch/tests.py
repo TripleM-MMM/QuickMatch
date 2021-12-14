@@ -3,7 +3,7 @@ from django.test import TestCase
 from django.test.client import RequestFactory
 from quickmatch.models import *
 from django.utils import timezone
-from rest_framework.test import APIRequestFactory
+from rest_framework.test import APIRequestFactory, APIClient, RequestsClient
 from rest_framework import status
 from rest_framework.test import APITestCase
 from django.urls import reverse
@@ -66,11 +66,37 @@ class MyUserTest(TestCase):
         q = view.queryset
         self.assertTrue(isinstance(q, QuerySet))
 
-# view test 
-# ...
-
 
 # API test
+
+class MatchApiTest(APITestCase):
+    def test_match_api(self):
+        client = RequestsClient()
+        response = client.get('http://127.0.0.1:8000/api/matches/')
+        assert response.status_code == 200
+    # factory = APIRequestFactory()
+    # request = factory.post('api//matches/', {'id': '0', 'pitch_id': '1', 'price': '50', 'organizer': 'Jan', 'data': '2006-10-25 14:30:59', 'description': 'Krótki opis', 'signed_players': '1', 'max_players': '10'})
+    # assert request.status_code == 200
+
+class PitchApiTest(APITestCase):
+    def test_pitch_api(self):
+        client = RequestsClient()
+        response = client.get('http://127.0.0.1:8000/api/pitches/')
+        assert response.status_code == 200
+
+class UserApiTest(APITestCase):
+    def test_user_api(self):
+        client = RequestsClient()
+        response = client.get('http://127.0.0.1:8000/api/users/')
+        assert response.status_code == 200
+
+# class EntryResourceTest(ResourceTestCase):
+
+#     def test_get_api_json(self):
+#         resp = self.api_client.get('/api/matches/', format='json')
+#         self.assertValidJSONResponse(resp)
+
+
 # class MatchCreationTest(APITestCase):
 #     def test_create_match(self):
 #         """
