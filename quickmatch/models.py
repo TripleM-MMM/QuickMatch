@@ -7,12 +7,12 @@ from django.db.models.fields import proxy
 # Create your models here.
 class Match(models.Model):
     pitch = models.ForeignKey(to="Pitch", on_delete=models.DO_NOTHING)
-    price = models.CharField(max_length=100, blank=True)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
     organizer = models.ForeignKey(to="MyUser", on_delete=models.DO_NOTHING) # id of organizer
-    date = models.DateTimeField(blank=True)
+    date = models.DateTimeField()
     description = models.TextField()
-    signed_players = models.CharField(max_length=100, blank=True)
-    max_players = models.CharField(max_length=100, default=4)
+    signed_players = models.DecimalField(max_digits=5, decimal_places=0)
+    max_players = models.DecimalField(max_digits=5, decimal_places=0, default=4)
 
     class Meta:
         ordering = ["date", "pitch_id"]
@@ -20,7 +20,7 @@ class Match(models.Model):
         verbose_name_plural = "Matches"
 
     def __str__(self):
-        return "Match: " + self.date + " " + self.pitch
+        return "Match: " + self.description
 
 class Pitch(models.Model):
     name = models.CharField(max_length=100)
@@ -38,7 +38,7 @@ class Pitch(models.Model):
 
 class MyUser(User):
     models.OneToOneField(User, on_delete=models.CASCADE)
-    user_matches = models.ManyToManyField(Match, blank=True)
+    user_matches = models.ManyToManyField(to="Match", related_name="players")
 
 
 class MyUserInline(admin.StackedInline):
