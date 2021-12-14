@@ -28,12 +28,12 @@ router.register(r'pitches', views.PitchView, 'pitch')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/', views.hello_world), # NEW
+    #path('hello/', views.hello_world), # NEW
     # http://127.0.0.1:8000/ksiazki
-    path("matches/", views.list_matches), # NEW
-    path('accounts/', include('django.contrib.auth.urls')), # NEW
-    path('accounts/profile/', views.profile_view, name='user_profile'), # NEW
-    path('accounts/signup/', views.user_signup, name="user_signup"), # NEW
+    #path("matches/", views.list_matches), # NEW
+    #path('accounts/', include('django.contrib.auth.urls')), # NEW
+    #path('accounts/profile/', views.profile_view, name='user_profile'), # NEW
+    #path('accounts/signup/', views.user_signup, name="user_signup"), # NEW
     path('api/', include(router.urls)),
     # path('', TemplateView.as_view(template_name='index.html'))
 ]

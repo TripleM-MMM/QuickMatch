@@ -1,6 +1,13 @@
+from django.db.models.query import QuerySet
 from django.test import TestCase
+from django.test.client import RequestFactory
 from quickmatch.models import *
 from django.utils import timezone
+from rest_framework.test import APIRequestFactory
+from rest_framework import status
+from rest_framework.test import APITestCase
+from django.urls import reverse
+from quickmatch.views import *
 # from django.core.urlresolvers import reverse
 
 # Create your tests here.
@@ -14,6 +21,15 @@ class MatchTest(TestCase):
         m = self.create_match()
         self.assertTrue(isinstance(m, Match))
 
+    # view class test
+    def test_match_view_class(self):
+        request = RequestFactory().get('/')
+        view = MatchView()
+        view.setup(request)
+
+        q = view.queryset
+        self.assertTrue(isinstance(q, QuerySet))
+
 # model test
 class PitchTest(TestCase):
     def create_pitch(self, nameX="Orlik", addressX="ul. Piaski 8", contactX="www.website.com", photo_urlX='www.photo.com'):
@@ -22,6 +38,15 @@ class PitchTest(TestCase):
     def test_pitch_creation(self):
         p = self.create_pitch()
         self.assertTrue(isinstance(p, Pitch))
+
+    # view class test
+    def test_pitch_view_class(self):
+        request = RequestFactory().get('/')
+        view = PitchView()
+        view.setup(request)
+
+        q = view.queryset
+        self.assertTrue(isinstance(q, QuerySet))
 
 # model test
 class MyUserTest(TestCase):
@@ -32,9 +57,28 @@ class MyUserTest(TestCase):
         u = self.create_myuser()
         self.assertTrue(isinstance(u, MyUser))
 
+    # view class test
+    def test_myuser_view_class(self):
+        request = RequestFactory().get('/')
+        view = MyUserView()
+        view.setup(request)
+
+        q = view.queryset
+        self.assertTrue(isinstance(q, QuerySet))
 
 # view test 
 # ...
 
 
 # API test
+# class MatchCreationTest(APITestCase):
+#     def test_create_match(self):
+#         """
+#         Ensure we can create a new user object.
+#         """
+#         url = reverse('create_match')
+#         data = {'name': 'DabApps'}
+#         response = self.client.post(url, data, format='json')
+#         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+#         self.assertEqual(Match.objects.count(), 1)
+#         self.assertEqual(Match.objects.get().name, 'DabApps')
