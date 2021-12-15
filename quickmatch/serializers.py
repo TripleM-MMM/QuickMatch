@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class MatchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Match
-        fields = ('id', 'pitch', 'price', 'organizer', 'date', 'description', 'signed_players', 'max_players')
+        fields = ('id', 'pitch', 'price', 'organizer', 'date', 'description', 'signed_players', 'max_players', 'players')
 
 
 class PitchSerializer(serializers.ModelSerializer):
