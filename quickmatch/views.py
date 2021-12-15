@@ -56,7 +56,7 @@ class CreateMatchView(viewsets.ViewSet):
 
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            pitch = Pitch.objects.filter(id=serializer.data.get('pitch'))[0]
+            pitch = Pitch.objects.get(id=serializer.data.get('pitch'))
             price = serializer.data.get('price')
             date = serializer.data.get('date')
             description = serializer.data.get('description')
