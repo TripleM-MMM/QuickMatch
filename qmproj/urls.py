@@ -25,6 +25,7 @@ router = routers.DefaultRouter()
 router.register(r'matches', views.MatchView, 'match')
 router.register(r'users', views.MyUserView, 'user')
 router.register(r'pitches', views.PitchView, 'pitch')
+router.register(r'create_match', views.CreateMatchView, 'create_match')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,5 +36,6 @@ urlpatterns = [
     #path('accounts/profile/', views.profile_view, name='user_profile'), # NEW
     #path('accounts/signup/', views.user_signup, name="user_signup"), # NEW
     path('api/', include(router.urls)),
+    #path('create_match', views.CreateMatchView.as_view()),
     # path('', TemplateView.as_view(template_name='index.html'))
 ]

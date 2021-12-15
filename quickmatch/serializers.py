@@ -7,6 +7,10 @@ class MatchSerializer(serializers.ModelSerializer):
         model = Match
         fields = ('id', 'pitch', 'price', 'organizer', 'date', 'description', 'signed_players', 'max_players', 'players')
 
+class CreateMatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Match
+        fields = ('pitch', 'price', 'date', 'description', 'max_players')
 
 class PitchSerializer(serializers.ModelSerializer):
     class Meta:
