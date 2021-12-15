@@ -61,10 +61,14 @@ class CreateMatchView(viewsets.ViewSet):
             date = serializer.data.get('date')
             description = serializer.data.get('description')
             max_players = serializer.data.get('max_players')
-            organizer = self.request.session.session_key # MUST BE A MYUSER INSTANCE
+            #organizer = self.request.session.session_key # MUST BE A MYUSER INSTANCE
+            organizer = MyUser() # MUST BE AN EXISTING MYUSER INSTANCE
+            organizer.save() # MUST BE AN EXISTING MYUSER INSTANCE
             signed_players = 1
 
             match = Match(pitch=pitch, price=price, organizer=organizer, date=date, description=description, signed_players=signed_players, max_players=max_players)
+            match.save()
+            match.players.add(organizer)
             match.save()
         
         return Response(MatchSerializer(match).data, status=status.HTTP_201_CREATED)
