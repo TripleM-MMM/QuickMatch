@@ -7,11 +7,9 @@ import axios from 'axios';
 
 
 function Create() {
-
-
-    const [pitch, setPitch] = useState(5)
+    const [pitch_id, setPlace] = useState('MS AGH')
     const [price, setPrice] = useState('')
-    const [organizer, setOrganizer] = useState(6)
+    const [organizer, setOrganizer] = useState('Jan abab')
     const [date, setDate] = useState(null)
     const [description, setDescription] = useState('')
     const [signed_players, setSigned_players] = useState('0')
@@ -21,7 +19,7 @@ function Create() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const match = {pitch, price, organizer, date, description, signed_players, max_players};
+        const match = {pitch_id, price, organizer, date, description, signed_players, max_players};
 
     // fetch('http://localhost:8000/matches',  {
     //     method: 'POST',
@@ -40,18 +38,6 @@ function Create() {
     
     }
 
-        
-    // axios.get("/api/pitches/").then(resp => {
-    //     let x = resp.data
-    //     console.log(x[0]);
-    //     setPitch(x[0])
-    // });
-    // axios.get("/api/users/").then(resp => {
-    //     let y = resp.data
-    //     console.log(y[0]);
-    //     setOrganizer(y[0])
-    // });
-
     return (
         <div className="create">
             <h2>Dodaj nowy mecz</h2>
@@ -59,8 +45,8 @@ function Create() {
                 <label>Miejsce: </label>
                 <select
                     required
-                    value={pitch}
-                    onChange={(e) => setPitch()}
+                    value={pitch_id}
+                    onChange={(e) => setPlace(e.target.value)}
                 >
                     <option value="MS AGH">MS AGH</option>
                     <option value="COM COM">COM COM</option>
