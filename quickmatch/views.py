@@ -9,6 +9,8 @@ from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 #def hello_world(request): # NEW
@@ -43,16 +45,22 @@ from rest_framework import authentication, permissions
 # NEW - for React.js
 
 # Views for matches
-class MatchView(viewsets.ModelViewSet):
-    serializer_class = MatchSerializer
-    queryset = Match.objects.all()
+class MatchView(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Match.objects.all()
+        serializer = MatchSerializer(queryset, many=True)
+        return Response(serializer.data)
+        
 
-class CreateMatchView(viewsets.ViewSet):
+#@login_required(login_url='/login/')
+class CreateMatchView(LoginRequiredMixin, viewsets.ViewSet):
+    login_url = '/login/' # CHANGE TO DESIRED LOGIN URL !!!
+    redirect_field_name = 'redirect_to'
     serializer_class = CreateMatchSerializer
 
     def create(self, request, format=None):
-        if not self.request.session.exists(self.request.session.session_key):
-            self.request.session.create()
+        # if not self.request.session.exists(self.request.session.session_key):
+        #     self.request.session.create()
 
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
@@ -61,9 +69,9 @@ class CreateMatchView(viewsets.ViewSet):
             date = serializer.data.get('date')
             description = serializer.data.get('description')
             max_players = serializer.data.get('max_players')
-            #organizer = self.request.session.session_key # MUST BE A MYUSER INSTANCE
-            organizer = MyUser() # MUST BE AN EXISTING MYUSER INSTANCE
-            organizer.save() # MUST BE AN EXISTING MYUSER INSTANCE
+            organizer = MyUser.objects.get(id=self.request.user.id) # MUST BE A MYUSER INSTANCE
+            # organizer = MyUser() # MUST BE AN EXISTING MYUSER INSTANCE
+            # organizer.save() # MUST BE AN EXISTING MYUSER INSTANCE
             signed_players = 1
 
             match = Match(pitch=pitch, price=price, organizer=organizer, date=date, description=description, signed_players=signed_players, max_players=max_players)
@@ -73,12 +81,41 @@ class CreateMatchView(viewsets.ViewSet):
         
         return Response(MatchSerializer(match).data, status=status.HTTP_201_CREATED)
 
+class SignForMatchView(LoginRequiredMixin, viewsets.ViewSet):
+    login_url = '/login/' # CHANGE TO DESIRED LOGIN URL !!!
+    redirect_field_name = 'redirect_to'
+    serializer_class = SignFoMatchSerializer
 
-class PitchView(viewsets.ModelViewSet):
-    serializer_class = PitchSerializer
-    queryset = Pitch.objects.all()
+    def update(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            match_id = serializer.data.get('match_id')
+            match = Match.objects.get(id=match_id)
+            user = MyUser.objects.get(id=self.request.user.id)
+            user.user_matches.add(match)
+            match.signed_players = match.signed_players + 1
+        
+        return Response(MatchSerializer(match).data, status=status.HTTP_200_OK)
+            
+class PitchView(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Pitch.objects.all()
+        serializer = PitchSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 # Views for user
-class MyUserView(viewsets.ModelViewSet):
+class MyUserView(viewsets.ViewSet):
+    def list(self, request):
+        queryset = MyUser.objects.all()
+        serializer = MyUserSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+class UserProfileView(LoginRequiredMixin, viewsets.ViewSet):
+    login_url = '/login/' # CHANGE TO DESIRED LOGIN URL !!!
+    redirect_field_name = 'redirect_to'
     serializer_class = MyUserSerializer
-    queryset = MyUser.objects.all()
+
+    def retrieve(self, request, format=None):
+        user = MyUser.objects.get(id=self.request.user.id)
+        serializer = MyUserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
