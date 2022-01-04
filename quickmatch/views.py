@@ -86,7 +86,7 @@ class SignForMatchView(LoginRequiredMixin, viewsets.ViewSet):
     redirect_field_name = 'redirect_to'
     serializer_class = SignFoMatchSerializer
 
-    def update(self, request, format=None):
+    def create(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             match_id = serializer.data.get('match_id')
@@ -95,7 +95,7 @@ class SignForMatchView(LoginRequiredMixin, viewsets.ViewSet):
             user.user_matches.add(match)
             match.signed_players = match.signed_players + 1
         
-        return Response(MatchSerializer(match).data, status=status.HTTP_200_OK)
+        return Response(MatchSerializer(match).data, status=status.HTTP_201_CREATED)
             
 class PitchView(viewsets.ViewSet):
     def list(self, request):
@@ -115,7 +115,7 @@ class UserProfileView(LoginRequiredMixin, viewsets.ViewSet):
     redirect_field_name = 'redirect_to'
     serializer_class = MyUserSerializer
 
-    def retrieve(self, request, format=None):
+    def list(self, request, pk=None, format=None):
         user = MyUser.objects.get(id=self.request.user.id)
         serializer = MyUserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)

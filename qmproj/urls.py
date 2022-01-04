@@ -29,6 +29,7 @@ router.register(r'create_match', views.CreateMatchView, 'create_match')
 router.register(r'sign_for_match', views.SignForMatchView, 'sign_for_match')
 router.register(r'user_profile', views.UserProfileView, 'user_profile')
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('hello/', views.hello_world), # NEW
@@ -38,7 +39,11 @@ urlpatterns = [
     #path('accounts/profile/', views.profile_view, name='user_profile'), # NEW
     #path('accounts/signup/', views.user_signup, name="user_signup"), # NEW
     path('api/', include(router.urls)),
+    #path('api/sign_for_match/', views.SignForMatchView.as_view({'post':'create'})),
+    #path('api/user_profile/', views.UserProfileView.as_view({'get':'retrieve'})),
     path('login/', TemplateView.as_view(template_name='hello.html')), # to login
     #path('create_match', views.CreateMatchView.as_view()),
     # path('', TemplateView.as_view(template_name='index.html'))
 ]
+
+
