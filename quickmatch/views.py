@@ -93,7 +93,7 @@ class SignForMatchView(LoginRequiredMixin, viewsets.ViewSet):
             match_id = serializer.data.get('match_id')
             match = Match.objects.get(id=match_id)
             user = MyUser.objects.get(id=self.request.user.id)
-            user.user_matches.add(match)
+            match.players.add(user)
             match.signed_players = match.signed_players + 1
             user.save()
             match.save()
