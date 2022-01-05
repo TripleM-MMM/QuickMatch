@@ -49,7 +49,7 @@ class MatchView(viewsets.ViewSet):
     def list(self, request):
         queryset = Match.objects.all()
         serializer = MatchSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
         
 
 #@login_required(login_url='/login/')
@@ -101,14 +101,14 @@ class PitchView(viewsets.ViewSet):
     def list(self, request):
         queryset = Pitch.objects.all()
         serializer = PitchSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 # Views for user
 class MyUserView(viewsets.ViewSet):
     def list(self, request):
         queryset = MyUser.objects.all()
         serializer = MyUserSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 class UserProfileView(LoginRequiredMixin, viewsets.ViewSet):
     login_url = '/login/' # CHANGE TO DESIRED LOGIN URL !!!
