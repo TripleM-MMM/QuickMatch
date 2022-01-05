@@ -77,6 +77,7 @@ class CreateMatchView(LoginRequiredMixin, viewsets.ViewSet):
             match = Match(pitch=pitch, price=price, organizer=organizer, date=date, description=description, signed_players=signed_players, max_players=max_players)
             match.save()
             match.players.add(organizer)
+            organizer.save()
             match.save()
         
         return Response(MatchSerializer(match).data, status=status.HTTP_201_CREATED)
@@ -94,6 +95,8 @@ class SignForMatchView(LoginRequiredMixin, viewsets.ViewSet):
             user = MyUser.objects.get(id=self.request.user.id)
             user.user_matches.add(match)
             match.signed_players = match.signed_players + 1
+            user.save()
+            match.save()
         
         return Response(MatchSerializer(match).data, status=status.HTTP_201_CREATED)
             
