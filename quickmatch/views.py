@@ -73,12 +73,21 @@ class CreateMatchView(LoginRequiredMixin, viewsets.ViewSet):
             # organizer = MyUser() # MUST BE AN EXISTING MYUSER INSTANCE
             # organizer.save() # MUST BE AN EXISTING MYUSER INSTANCE
             signed_players = 1
-
             match = Match(pitch=pitch, price=price, organizer=organizer, date=date, description=description, signed_players=signed_players, max_players=max_players)
             match.save()
             match.players.add(organizer)
             organizer.save()
             match.save()
+
+            # print("Organizer matches:")
+            # for m in organizer.user_matches.all():
+            #     print(m)
+            # print("Players for m:")
+            # print(m)
+            # for p in match.players.all():
+            #     print(p)
+
+            #organizer.user_matches.add(match)
         
         return Response(MatchSerializer(match).data, status=status.HTTP_201_CREATED)
 
@@ -94,9 +103,18 @@ class SignForMatchView(LoginRequiredMixin, viewsets.ViewSet):
             match = Match.objects.get(id=match_id)
             user = MyUser.objects.get(id=self.request.user.id)
             match.players.add(user)
+            #user.user_matches.add(match)
             match.signed_players = match.signed_players + 1
             user.save()
             match.save()
+
+            # print("User matches:")
+            # for m in user.user_matches.all():
+            #     print(m)
+            # print("Players for m:")
+            # print(m)
+            # for p in match.players.all():
+            #     print(p)
         
         return Response(MatchSerializer(match).data, status=status.HTTP_201_CREATED)
             

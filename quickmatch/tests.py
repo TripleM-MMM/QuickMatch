@@ -59,9 +59,12 @@ class MatchTest(TestCase):
         self.assertEqual(response.status_code, 201)
 
     def test_sign_for_match_view(self):
+        self.m.players.add(self.u)
+        
         self.u1 = create_user("JanX", "janx@wp.pl", "Janx1234")
         self.u1.set_password('1234')
         self.u1.save()
+        # initialCount = self.m.signed_players
         # print("ID JanX:")
         # print(self.u1.id)
         # print("ID Mecz m:")
@@ -70,6 +73,7 @@ class MatchTest(TestCase):
         # print(self.u1.user_matches)
         # print("Match m players:")
         # print(self.m.players)
+        # print(initialCount)
         self.client = APIClient()
         self.client.login(username="JanX", password="1234")
         response = self.client.post('/api/sign_for_match/', {'match_id': self.m.id}, format='json')
@@ -77,6 +81,8 @@ class MatchTest(TestCase):
         # print(self.u1.user_matches)
         # print("Match m players after:")
         # print(self.m.players)
+        # after = self.m.signed_players
+        #print(after)
         self.assertEqual(response.status_code, 201)
 
 
