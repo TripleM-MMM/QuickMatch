@@ -20,6 +20,7 @@ from django.urls import include
 from rest_framework import routers
 from quickmatch import views
 from django.views.generic import TemplateView
+from rest_framework_jwt.views import obtain_jwt_token
 
 router = routers.DefaultRouter()
 router.register(r'matches', views.MatchView, 'match')
@@ -44,6 +45,8 @@ urlpatterns = [
     path('login/', TemplateView.as_view(template_name='hello.html')), # to login
     #path('create_match', views.CreateMatchView.as_view()),
     # path('', TemplateView.as_view(template_name='index.html'))
+    path('token-auth/', obtain_jwt_token),
+    path('core/', include('core.urls'))
 ]
 
 
