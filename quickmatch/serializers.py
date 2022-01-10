@@ -12,6 +12,9 @@ class CreateMatchSerializer(serializers.ModelSerializer):
         model = Match
         fields = ('pitch', 'price', 'date', 'description', 'max_players')
 
+class SignFoMatchSerializer(serializers.Serializer):
+    match_id = serializers.IntegerField()
+
 class PitchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pitch
