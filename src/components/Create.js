@@ -7,6 +7,11 @@ import axios from 'axios';
 
 
 function Create() {
+    let yourConfig = {
+        headers: {
+           Authorization: "Bearer " + localStorage.getItem('token')
+        }
+     }
 
 
     const [pitch, setPitch] = useState(5)
@@ -21,8 +26,11 @@ function Create() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const match = {pitch, price, organizer, date, description, signed_players, max_players};
-        axios.post("/api/matches/", match)
+        console.log(localStorage.getItem('token'))
+        const match = {pitch, price, date, description, max_players};
+        axios.post("/api/create_match/", match,         {headers: {
+            Authorization: `token ${localStorage.getItem('token')}`
+         }})
         .then(res=>{
             console.log(res);
             history.go(-1)})
