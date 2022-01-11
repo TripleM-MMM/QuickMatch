@@ -7,12 +7,6 @@ import axios from 'axios';
 
 
 function Create() {
-    let yourConfig = {
-        headers: {
-           Authorization: "Bearer " + localStorage.getItem('token')
-        }
-     }
-
 
     const [pitch, setPitch] = useState(5)
     const [price, setPrice] = useState('')
@@ -28,8 +22,8 @@ function Create() {
         e.preventDefault();
         console.log(localStorage.getItem('token'))
         const match = {pitch, price, date, description, max_players};
-        axios.post("/api/create_match/", match,         {headers: {
-            Authorization: `token ${localStorage.getItem('token')}`
+        axios.post("/api/create_match/", match, {headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`,
          }})
         .then(res=>{
             console.log(res);
