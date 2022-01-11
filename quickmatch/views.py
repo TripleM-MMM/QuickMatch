@@ -69,8 +69,8 @@ class CreateMatchView(viewsets.ViewSet):
             date = serializer.data.get('date')
             description = serializer.data.get('description')
             max_players = serializer.data.get('max_players')
-            #organizer = MyUser.objects.get(id=self.request.user.id) # MUST BE A MYUSER INSTANCE
-            organizer = MyUser.objects.create(username="JOHN1", email="JOHN1@gmail.com", password="JOHN1X")
+            organizer = MyUser.objects.get(id=self.request.user.id) # MUST BE A MYUSER INSTANCE
+            #organizer = MyUser.objects.create(username="JOHN1", email="JOHN1@gmail.com", password="JOHN1X")
             # organizer = MyUser() # MUST BE AN EXISTING MYUSER INSTANCE
             # organizer.save() # MUST BE AN EXISTING MYUSER INSTANCE
             print(self.request.user.id)

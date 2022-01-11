@@ -1,8 +1,13 @@
 import React, {useState} from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import App from '../App';
+
+
 
 function Navbar() {
+    const logged_in = localStorage.getItem('token') ? true : false;
     return(
         <nav className='navbar'>
             <Link to='/' className='logo-link'>
@@ -15,6 +20,8 @@ function Navbar() {
                 <Link to='/contact'>Kontakt</Link>  
             </div>
             <div className='login'>
+                <Link to='/profile'>{logged_in ? `Witaj, `
+            : 'Proszę, zaloguj się !'}</Link>
                 <Link to='/login'>Zarejestruj się</Link>
             </div>
         </nav>
