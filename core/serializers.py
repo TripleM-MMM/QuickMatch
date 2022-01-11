@@ -1,3 +1,5 @@
+from django.contrib.auth.forms import UsernameField
+from quickmatch.models import MyUser
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
 from django.contrib.auth.models import User
@@ -32,5 +34,6 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         return instance
 
     class Meta:
-        model = User
-        fields = ('token', 'username', 'password')
+        model = MyUser
+        #fields = ('token', 'username', 'password')
+        fields = ('token','id', 'username', 'first_name', 'last_name', 'email', 'password', 'user_matches')
