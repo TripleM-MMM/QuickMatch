@@ -7,9 +7,16 @@ import axios from 'axios';
 
 
 function Create() {
-    const [pitch_id, setPlace] = useState('MS AGH')
+    let yourConfig = {
+        headers: {
+           Authorization: "Bearer " + localStorage.getItem('token')
+        }
+     }
+
+
+    const [pitch, setPitch] = useState(5)
     const [price, setPrice] = useState('')
-    const [organizer, setOrganizer] = useState('Jan abab')
+    const [organizer, setOrganizer] = useState(6)
     const [date, setDate] = useState(null)
     const [description, setDescription] = useState('')
     const [signed_players, setSigned_players] = useState('0')
@@ -19,25 +26,16 @@ function Create() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const match = {pitch_id, price, organizer, date, description, signed_players, max_players};
-
-    // fetch('http://localhost:8000/matches',  {
-    //     method: 'POST',
-    //     headers: { "Content-type": "application/json"},
-    //     body: JSON.stringify(match) 
-    // }).then( () => {
-    //     console.log('new match added');
-    //     history.go(-1);
-    // })
-
-
-        axios.post("/api/matches/", match)
+        console.log(localStorage.getItem('token'))
+        const match = {pitch, price, date, description, max_players};
+        axios.post("/api/create_match/", match,         {headers: {
+            Authorization: `token ${localStorage.getItem('token')}`
+         }})
         .then(res=>{
             console.log(res);
             history.go(-1)})
-    
     }
-
+    
     return (
         <div className="create">
             <h2>Dodaj nowy mecz</h2>
@@ -45,8 +43,8 @@ function Create() {
                 <label>Miejsce: </label>
                 <select
                     required
-                    value={pitch_id}
-                    onChange={(e) => setPlace(e.target.value)}
+                    value={pitch}
+                    onChange={(e) => setPitch()}
                 >
                     <option value="MS AGH">MS AGH</option>
                     <option value="COM COM">COM COM</option>
