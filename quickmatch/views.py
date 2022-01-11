@@ -53,9 +53,7 @@ class MatchView(viewsets.ViewSet):
         
 
 #@login_required(login_url='/login/')
-class CreateMatchView(LoginRequiredMixin, viewsets.ViewSet):
-    login_url = '/login/' # CHANGE TO DESIRED LOGIN URL !!!
-    redirect_field_name = 'redirect_to'
+class CreateMatchView(viewsets.ViewSet):
     serializer_class = CreateMatchSerializer
 
     def create(self, request, format=None):
@@ -91,9 +89,7 @@ class CreateMatchView(LoginRequiredMixin, viewsets.ViewSet):
         
         return Response(MatchSerializer(match).data, status=status.HTTP_201_CREATED)
 
-class SignForMatchView(LoginRequiredMixin, viewsets.ViewSet):
-    login_url = '/login/' # CHANGE TO DESIRED LOGIN URL !!!
-    redirect_field_name = 'redirect_to'
+class SignForMatchView(viewsets.ViewSet):
     serializer_class = SignFoMatchSerializer
 
     def create(self, request, format=None):
@@ -131,9 +127,7 @@ class MyUserView(viewsets.ViewSet):
         serializer = MyUserSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-class UserProfileView(LoginRequiredMixin, viewsets.ViewSet):
-    login_url = '/login/' # CHANGE TO DESIRED LOGIN URL !!!
-    redirect_field_name = 'redirect_to'
+class UserProfileView(viewsets.ViewSet):
     serializer_class = MyUserSerializer
 
     def list(self, request, pk=None, format=None):
