@@ -6,8 +6,8 @@ import './MatchDetails.css'
 
 const MatchDetails = () => {
     const { id } = useParams();
-    const {data: match} = useFetch("/api/matches/" + id);
-    const {data: pitch} = useFetch("/api/pitches/" + 1);
+    const {data: match} = useFetch("/api/matches/"+id);
+    const {data: pitch} = useFetch("/api/pitches/" + 5);
     const history = useHistory();
 
     const handleDelete = () => {

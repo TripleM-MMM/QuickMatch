@@ -7,7 +7,21 @@ import App from '../App';
 
 
 function Navbar() {
+
+    const [username, setUsername] = useState('')
     const logged_in = localStorage.getItem('token') ? true : false;
+        if (logged_in) {
+          fetch('http://localhost:8000/core/current_user/', {
+            headers: {
+              Authorization: `JWT ${localStorage.getItem('token')}`
+            }
+          })
+            .then(res => res.json())
+            .then(json => {
+              setUsername(json.username) });
+            ;
+        }
+    
     return(
         <nav className='navbar'>
             <Link to='/' className='logo-link'>
@@ -19,9 +33,10 @@ function Navbar() {
                 <Link to='/pitches'>Boiska</Link>
                 <Link to='/contact'>Kontakt</Link>  
             </div>
+            <div className='status'>
+                {logged_in ? `Witaj ${username} !`: 'Zaloguj się !'}
+            </div>
             <div className='login'>
-                <Link to='/profile'>{logged_in ? `Witaj, `
-            : 'Proszę, zaloguj się !'}</Link>
                 <Link to='/login'>Zarejestruj się</Link>
             </div>
         </nav>
