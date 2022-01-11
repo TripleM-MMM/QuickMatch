@@ -5,11 +5,7 @@ const useFetch = (url) => {
     const [data, setData] = useState(null)
 
     useEffect(() => {
-      axios.get('http://localhost:8000'+url, {
-        headers: {
-          Authorization: `JWT ${localStorage.getItem('token')}`
-        }
-      })
+      axios.get('http://localhost:8000'+url)
         .then((res) => {
             console.log(res.data)
             setData(res.data)})

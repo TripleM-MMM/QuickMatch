@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework import authentication, permissions
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 #def hello_world(request): # NEW
@@ -54,6 +55,7 @@ class MatchView(viewsets.ViewSet):
 
 #@login_required(login_url='/login/')
 class CreateMatchView(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
     serializer_class = CreateMatchSerializer
 
     def create(self, request, format=None):
@@ -67,9 +69,11 @@ class CreateMatchView(viewsets.ViewSet):
             date = serializer.data.get('date')
             description = serializer.data.get('description')
             max_players = serializer.data.get('max_players')
-            organizer = MyUser.objects.get(id=self.request.user.id) # MUST BE A MYUSER INSTANCE
+            #organizer = MyUser.objects.get(id=self.request.user.id) # MUST BE A MYUSER INSTANCE
+            organizer = MyUser.objects.create(username="JOHN1", email="JOHN1@gmail.com", password="JOHN1X")
             # organizer = MyUser() # MUST BE AN EXISTING MYUSER INSTANCE
             # organizer.save() # MUST BE AN EXISTING MYUSER INSTANCE
+            print(self.request.user.id)
             signed_players = 1
             match = Match(pitch=pitch, price=price, organizer=organizer, date=date, description=description, signed_players=signed_players, max_players=max_players)
             match.save()
@@ -90,6 +94,7 @@ class CreateMatchView(viewsets.ViewSet):
         return Response(MatchSerializer(match).data, status=status.HTTP_201_CREATED)
 
 class SignForMatchView(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
     serializer_class = SignFoMatchSerializer
 
     def create(self, request, format=None):
@@ -128,6 +133,7 @@ class MyUserView(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 class UserProfileView(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
     serializer_class = MyUserSerializer
 
     def list(self, request, pk=None, format=None):
