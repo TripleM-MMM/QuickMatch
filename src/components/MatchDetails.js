@@ -6,12 +6,13 @@ import './MatchDetails.css'
 
 const MatchDetails = () => {
     const { id } = useParams();
-    const {data: match} = useFetch("/api/matches/"+id);
-    const {data: pitch} = useFetch("/api/pitches/" + 5);
+    const {data: match} = useFetch("/api/matches/"+id+"/");
+    const {data: pitch} = useFetch("/api/pitches/" + 5 + "/");
     const history = useHistory();
+    const delete_ = {id}
 
     const handleDelete = () => {
-        axios.post("/api/delete_match/", {id}, {headers: {
+        axios.post("/api/delete_match/", delete_, {headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`,
          }})
         .then(res=>{
