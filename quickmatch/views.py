@@ -142,11 +142,9 @@ class PitchView(viewsets.ModelViewSet):
     queryset = Pitch.objects.all()
 
 # Views for user
-class MyUserView(viewsets.ViewSet):
-    def list(self, request):
-        queryset = MyUser.objects.all()
-        serializer = MyUserSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+class MyUserView(viewsets.ModelViewSet):
+    serializer_class = PitchSerializer
+    queryset = Pitch.objects.all()
 
 class UserProfileView(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
