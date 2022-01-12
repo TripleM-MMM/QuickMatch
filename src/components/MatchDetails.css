@@ -3,6 +3,11 @@
     width: 50%;
 }
 
+.match_details .row1 .column1 img {
+    max-width: 100%;
+    height: auto;
+}
+
 .row1:after {
     content: "";
     display: table;

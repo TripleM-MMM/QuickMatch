@@ -101,10 +101,7 @@ const MatchDetails = () => {
                     <h2> { pitch && pitch.name } </h2>
                     <p>Adres: {pitch && pitch.address}</p>
                     <p>Kontakt: {pitch && pitch.contact}</p>
-                    <img 
-                        src={pitch && pitch.photo_url}
-                        alt="new"
-                    />
+                    <img src={pitch && pitch.photo_url} alt="Pitch"/>
                 </div>
                 <div className="column1">
                     <h1>Informacja o wydarzeniu</h1>
