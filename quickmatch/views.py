@@ -46,11 +46,9 @@ from rest_framework.permissions import IsAuthenticated
 # NEW - for React.js
 
 # Views for matches
-class MatchView(viewsets.ViewSet):
-    def list(self, request):
-        queryset = Match.objects.all()
-        serializer = MatchSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+class MatchView(viewsets.ModelViewSet):
+    serializer_class = MatchSerializer
+    queryset = Match.objects.all()
         
 
 #@login_required(login_url='/login/')
