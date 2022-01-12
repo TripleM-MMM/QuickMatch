@@ -159,8 +159,7 @@ class App extends Component {
           <Contact />
         </Route>
         <Route exact path='/profile'>
-          { this.state.logged_in && <Profile />}
-          { !this.state.logged_in && <h1>Musisz być zalogowany by móc edytować profil</h1> }
+            <Profile />
         </Route>
       </Switch>
     </Router>

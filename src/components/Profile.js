@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import {useHistory } from 'react-router-dom'
 import axios from 'axios';
+import Popup from './Popup';
 
 
 function Profile() {
@@ -12,6 +13,11 @@ function Profile() {
     const [first_name, setName] = useState('')
     const [last_name, setLastName] = useState('')
     const [password, setPassword] = useState('')
+
+    const [isLogged, setIsLogged] = useState(localStorage.getItem('token') ? true : false)
+    const togglePopup = () => {
+        history.go(-1)
+      }
 
     const [user_matches, setUserMatches] = useState('')
 
@@ -29,14 +35,11 @@ function Profile() {
 
     return (
         <div className="profile"> 
-
-<           div className="img">
+            <div className="img">
                 <img src="/static/stadium.jpg"/>
             </div> 
-
             <h2>Edytuj profil</h2>
             <form onSubmit={handleSubmit}>
-
                 <label>Nazwa użytkownika: </label>
                 <input
                     type="text"
@@ -44,7 +47,6 @@ function Profile() {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
-
                 <label>Imie: </label>
                 <input
                     type="text"
@@ -52,7 +54,6 @@ function Profile() {
                     value={first_name}
                     onChange={(e) => setName(e.target.value)}
                 />
-
                 <label>Nazwisko: </label>
                 <input
                     type="text"
@@ -69,9 +70,13 @@ function Profile() {
                 />
 
                 <button>Zapisz</button>
+                {!isLogged && <Popup
+                content={<>
+                    <b>Musisz być zalogowany !</b>
+                    </>}
+                    handleClose={togglePopup}
+                />}
             </form>
-
-
         </div>
     );
 }

@@ -11,14 +11,15 @@ function Create() {
     const [isOpen, setIsOpen] = useState(false);
  
     const togglePopup = () => {
-      setIsOpen(!isOpen);
+      history.go(-1)
     }
+    
     const [pitch, setPitch] = useState(5)
     const [price, setPrice] = useState('')
     const [date, setDate] = useState(null)
     const [description, setDescription] = useState('')
     const [max_players, setMax_players] = useState('1')
-    let isAuthorized = true;
+    const [isLogged, setIsLogged] = useState(localStorage.getItem('token') ? true : false)
 
     const history = useHistory()
 
@@ -30,11 +31,6 @@ function Create() {
          }})
         .catch(function (error) {
             if (error.response) {
-                if (error.response.status == 401) {
-                    isAuthorized= false
-                } else {
-                    isAuthorized= true
-                }
               console.log(error.response.status);
             } else {
               // Something happened in setting up the request that triggered an Error
@@ -43,12 +39,7 @@ function Create() {
             console.log(error.config);
           })
         .then(res=>{
-            console.log(isAuthorized)
-            if(isAuthorized) {
-                history.go(-1)
-            } else {
-                setIsOpen(true);
-            }
+            history.go(-1)
         })
     }
     
@@ -95,7 +86,7 @@ function Create() {
                     onChange={(e) => setMax_players(e.target.value)}
                 />
                 <button>Dodaj wydarzenie</button>
-                {isOpen && <Popup
+                {!isLogged && <Popup
                 content={<>
                     <b>Musisz być zalogowany !</b>
                     </>}
