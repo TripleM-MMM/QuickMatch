@@ -101,6 +101,9 @@ class SignForMatchView(viewsets.ViewSet):
             match_id = serializer.data.get('match_id')
             match = Match.objects.get(id=match_id)
             user = MyUser.objects.get(id=self.request.user.id)
+            # check if match is full or user already signed in:
+            if (match.signed_players==match.max_players) or (match.players.get(id=user.id)!=None):
+                return Response(MatchSerializer(match).data, status=status.HTTP_304_NOT_MODIFIED)
             match.players.add(user)
             #user.user_matches.add(match)
             match.signed_players = match.signed_players + 1
