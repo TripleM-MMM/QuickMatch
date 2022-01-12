@@ -139,11 +139,9 @@ class DeleteMatchView(viewsets.ViewSet):
             return Response(MatchSerializer(match).data, status=status.HTTP_403_FORBIDDEN)
         
             
-class PitchView(viewsets.ViewSet):
-    def list(self, request):
-        queryset = Pitch.objects.all()
-        serializer = PitchSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+class PitchView(viewsets.ModelViewSet):
+    serializer_class = PitchSerializer
+    queryset = Pitch.objects.all()
 
 # Views for user
 class MyUserView(viewsets.ViewSet):
