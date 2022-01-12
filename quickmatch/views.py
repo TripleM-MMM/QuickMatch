@@ -62,12 +62,21 @@ class CreateMatchView(viewsets.ViewSet):
 
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            pitch = Pitch.objects.get(id=serializer.data.get('pitch'))
+            try:
+                pitch = Pitch.objects.get(id=serializer.data.get('pitch'))
+            except Pitch.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+            
             price = serializer.data.get('price')
             date = serializer.data.get('date')
             description = serializer.data.get('description')
             max_players = serializer.data.get('max_players')
-            organizer = MyUser.objects.get(id=self.request.user.id) # MUST BE A MYUSER INSTANCE
+
+            try:
+                organizer = MyUser.objects.get(id=self.request.user.id)
+            except MyUser.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+             # MUST BE A MYUSER INSTANCE
             #organizer = MyUser.objects.create(username="JOHN1", email="JOHN1@gmail.com", password="JOHN1X")
             # organizer = MyUser() # MUST BE AN EXISTING MYUSER INSTANCE
             # organizer.save() # MUST BE AN EXISTING MYUSER INSTANCE
@@ -103,13 +112,23 @@ class SignForMatchView(viewsets.ViewSet):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             match_id = serializer.data.get('match_id')
-            match = Match.objects.get(id=match_id)
-            user = MyUser.objects.get(id=self.request.user.id)
+
+            try:
+                match = Match.objects.get(id=match_id)
+            except Match.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+
+            try:
+                user = MyUser.objects.get(id=self.request.user.id)
+            except MyUser.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+            
             # check if match is full or user already signed in:
             try:
                 exists = match.players.get(id=user.id)
             except MyUser.DoesNotExist:
                 exists = None
+
             if (match.signed_players==match.max_players) or (exists!=None):
                 return Response(MatchSerializer(match).data, status=status.HTTP_304_NOT_MODIFIED)
             match.players.add(user)
@@ -136,8 +155,17 @@ class DeleteMatchView(viewsets.ViewSet):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             match_id = serializer.data.get('match_id')
-            match = Match.objects.get(id=match_id)
-            user = MyUser.objects.get(id=self.request.user.id)
+
+            try:
+                match = Match.objects.get(id=match_id)
+            except Match.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+
+            try:
+                user = MyUser.objects.get(id=self.request.user.id)
+            except MyUser.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+            
             if user==match.organizer:
                 for p in match.players.all():
                     p.user_matches.remove(match)
@@ -166,6 +194,7 @@ class UserProfileView(viewsets.ModelViewSet):
             user = MyUser.objects.get(id=self.request.user.id)
         except MyUser.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
         serializer = MyUserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -181,7 +210,11 @@ class EditUserProfileView(viewsets.ViewSet):
         #     description = serializer.data.get('description')
         #     max_players = serializer.data.get('max_players')
         if serializer.is_valid():
-            user = MyUser.objects.get(id=self.request.user.id)
+            try:
+                user = MyUser.objects.get(id=self.request.user.id)
+            except MyUser.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+                
             new_username = serializer.data.get('username')
             new_first_name = serializer.data.get('first_name')
             new_last_name = serializer.data.get('last_name')
