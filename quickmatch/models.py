@@ -11,8 +11,8 @@ class Match(models.Model):
     organizer = models.ForeignKey(to="MyUser", on_delete=models.DO_NOTHING) # id of organizer
     date = models.DateTimeField()
     description = models.CharField(max_length=150)
-    signed_players = models.DecimalField(max_digits=5, decimal_places=0)
-    max_players = models.DecimalField(max_digits=5, decimal_places=0, default=4)
+    signed_players = models.IntegerField()
+    max_players = models.IntegerField()
 
     class Meta:
         ordering = ["date", "pitch_id"]
