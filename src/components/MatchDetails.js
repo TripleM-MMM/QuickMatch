@@ -4,8 +4,15 @@ import axios from 'axios';
 import {useHistory } from 'react-router-dom';
 import './MatchDetails.css'
 import {useState} from 'react';
+import Popup from './Popup';
 
 const MatchDetails = () => {
+    const [isOpen, setIsOpen] = useState(false)
+    const togglePopup = () => {
+        setIsOpen(!isOpen);
+    }
+    let isAuthorized = true;
+
     const {id} = useParams();
     const {data: match} = useFetch("/api/matches/"+ id  +"/");
     let organizer_id = match && match.organizer
@@ -13,7 +20,8 @@ const MatchDetails = () => {
     const {data: pitch} = useFetch("/api/pitches/" + pitch_id + "/");
     const {data: organizer} = useFetch("/api/users/" + organizer_id + "/");
     const history = useHistory();
-    const info = {id}
+    const match_id = id;
+    const info = {match_id}
 
     const [isLogged, setIsLogged] = useState(localStorage.getItem('token') ? true : false)
     const [username, setUsername] = useState('')
@@ -43,15 +51,39 @@ const MatchDetails = () => {
             console.log(error.config);
           })
         .then(res=>{
-            history.push('/matches')})
+            history.push('/matches')
+        })
     }
 
     const handleSign = () => {
         axios.post("/api/sign_for_match/", info, {headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`,
          }})
+         .catch(function (error) {
+            if (error.response) {
+                console.log(isOpen)
+                if (error.response.status == 304) {
+                    togglePopup();
+                }
+                else if (error.response.status == 401) {
+                    isAuthorized = false;
+                }
+                console.log(isOpen)
+              console.log(error.response.status);
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log(error.status)
+              console.log('Error', error.message);
+            }
+            console.log(error.config);
+          })
         .then(res=>{
-            history.push('/matches')})
+            if (isAuthorized) {
+                history.push('/matches');
+            } else {
+                setIsOpen(true);
+            }
+        })
     }
 
     return (
@@ -81,6 +113,12 @@ const MatchDetails = () => {
                 <button onClick={handleSign}>Dołącz do wydarzenia</button>}
                 {(username == (organizer && organizer.username)) && <button onClick={handleDelete}>Usuń wydarzenie</button>}
             </div>
+            {isOpen && <Popup
+                content={<>
+                    <b>Musisz być zalogowany !</b>
+                    </>}
+                    handleClose={togglePopup}
+            />}
         </div>
     )
 
