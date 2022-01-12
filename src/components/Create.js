@@ -4,30 +4,52 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import {useHistory } from 'react-router-dom'
 import axios from 'axios';
+import Popup from './Popup';
 
 
 function Create() {
-
+    const [isOpen, setIsOpen] = useState(false);
+ 
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
+    }
     const [pitch, setPitch] = useState(5)
     const [price, setPrice] = useState('')
-    const [organizer, setOrganizer] = useState(6)
     const [date, setDate] = useState(null)
     const [description, setDescription] = useState('')
-    const [signed_players, setSigned_players] = useState('0')
     const [max_players, setMax_players] = useState('1')
+    let isAuthorized = true;
 
     const history = useHistory()
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(localStorage.getItem('token'))
         const match = {pitch, price, date, description, max_players};
         axios.post("/api/create_match/", match, {headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`,
          }})
+        .catch(function (error) {
+            if (error.response) {
+                if (error.response.status == 401) {
+                    isAuthorized= false
+                } else {
+                    isAuthorized= true
+                }
+              console.log(error.response.status);
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log('Error', error.message);
+            }
+            console.log(error.config);
+          })
         .then(res=>{
-            console.log(res);
-            history.go(-1)})
+            console.log(isAuthorized)
+            if(isAuthorized) {
+                history.go(-1)
+            } else {
+                setIsOpen(true);
+            }
+        })
     }
     
     return (
@@ -73,6 +95,12 @@ function Create() {
                     onChange={(e) => setMax_players(e.target.value)}
                 />
                 <button>Dodaj wydarzenie</button>
+                {isOpen && <Popup
+                content={<>
+                    <b>Musisz być zalogowany !</b>
+                    </>}
+                    handleClose={togglePopup}
+                />}
             </form>
         </div>
     );
