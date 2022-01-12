@@ -11,7 +11,7 @@ const MatchDetails = () => {
     const history = useHistory();
 
     const handleDelete = () => {
-        axios.post("/api/delete_match/", id, {headers: {
+        axios.post("/api/delete_match/", {id}, {headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`,
          }})
         .then(res=>{
