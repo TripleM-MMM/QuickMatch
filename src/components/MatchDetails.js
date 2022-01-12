@@ -5,14 +5,15 @@ import {useHistory } from 'react-router-dom';
 import './MatchDetails.css'
 
 const MatchDetails = () => {
-    const { id } = useParams();
-    const {data: match} = useFetch("/api/matches/"+id+"/");
+    const {id} = useParams();
+    const {data: match} = useFetch("/api/matches/"+ id  +"/");
     const {data: pitch} = useFetch("/api/pitches/" + 5 + "/");
     const history = useHistory();
-    const delete_ = {id}
+    const match_id = id;
+    const to_delete = {match_id}
 
     const handleDelete = () => {
-        axios.post("/api/delete_match/", delete_, {headers: {
+        axios.post("/api/delete_match/", to_delete, {headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`,
          }})
         .then(res=>{
