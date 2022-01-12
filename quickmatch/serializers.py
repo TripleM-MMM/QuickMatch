@@ -29,3 +29,8 @@ class MyUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyUser
         fields = ('id', 'username', 'first_name', 'last_name', 'email', 'password', 'user_matches')
+
+class EditMyUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyUser
+        fields = ('username', 'first_name', 'last_name', 'email', 'password')

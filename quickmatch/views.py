@@ -154,3 +154,33 @@ class UserProfileView(viewsets.ViewSet):
         user = MyUser.objects.get(id=self.request.user.id)
         serializer = MyUserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class EditUserProfileView(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = EditMyUserSerializer
+
+    def create(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        # pitch = Pitch.objects.get(id=serializer.data.get('pitch'))
+        #     price = serializer.data.get('price')
+        #     date = serializer.data.get('date')
+        #     description = serializer.data.get('description')
+        #     max_players = serializer.data.get('max_players')
+        if serializer.is_valid():
+            user = MyUser.objects.get(id=self.request.user.id)
+            new_username = serializer.data.get('username')
+            new_first_name = serializer.data.get('first_name')
+            new_last_name = serializer.data.get('last_name')
+            new_email = serializer.data.get('email')
+            new_password = serializer.data.get('password')
+            
+            user.username = new_username
+            user.first_name = new_first_name
+            user.last_name = new_last_name
+            user.email = new_email
+            user.password = new_password
+            #user.set_password(new_password)
+
+            user.save()
+
+            return Response(MyUserSerializer(user).data, status=status.HTTP_200_OK)
