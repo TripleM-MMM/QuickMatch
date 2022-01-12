@@ -46,7 +46,7 @@ from rest_framework.permissions import IsAuthenticated
 # NEW - for React.js
 
 # Views for matches
-class MatchView(viewsets.ViewSet):
+class MatchView(viewsets.ModelViewSet):
     serializer_class = MatchSerializer
     queryset = Match.objects.all()
         
