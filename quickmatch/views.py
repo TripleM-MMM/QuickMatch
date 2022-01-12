@@ -154,8 +154,8 @@ class PitchView(viewsets.ModelViewSet):
 
 # Views for user
 class MyUserView(viewsets.ModelViewSet):
-    serializer_class = PitchSerializer
-    queryset = Pitch.objects.all()
+    serializer_class = MyUserSerializer
+    queryset = MyUser.objects.all()
 
 class UserProfileView(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
