@@ -11,7 +11,12 @@ const MatchDetails = () => {
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
+    const [isOpen2, setIsOpen2] = useState(false)
+    const togglePopup2 = () => {
+        setIsOpen2(!isOpen2);
+    }
     let isAuthorized = true;
+    let isEntered = false;
 
     const {id} = useParams();
     const {data: match} = useFetch("/api/matches/"+ id  +"/");
@@ -62,8 +67,8 @@ const MatchDetails = () => {
          .catch(function (error) {
             if (error.response) {
                 console.log(isOpen)
-                if (error.response.status == 304) {
-                    togglePopup();
+                if (error.response.status == 403) {
+                    isEntered = true;
                 }
                 else if (error.response.status == 401) {
                     isAuthorized = false;
@@ -78,8 +83,10 @@ const MatchDetails = () => {
             console.log(error.config);
           })
         .then(res=>{
-            if (isAuthorized) {
+            if (isAuthorized && !isEntered) {
                 history.push('/matches');
+            } else if (isEntered){
+                setIsOpen2(true);
             } else {
                 setIsOpen(true);
             }
@@ -118,6 +125,12 @@ const MatchDetails = () => {
                     <b>Musisz być zalogowany !</b>
                     </>}
                     handleClose={togglePopup}
+            />}
+            {isOpen2 && <Popup
+                content={<>
+                    <b>Już dołączyłeś do tego wydarzenia !</b>
+                    </>}
+                    handleClose={togglePopup2}
             />}
         </div>
     )
