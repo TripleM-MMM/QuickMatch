@@ -5,14 +5,23 @@ import {useHistory } from 'react-router-dom';
 import './MatchDetails.css'
 
 const MatchDetails = () => {
-    const { id } = useParams();
-    const {data: match} = useFetch("/api/matches/"+id+"/");
+    const {id} = useParams();
+    const {data: match} = useFetch("/api/matches/"+ id  +"/");
     const {data: pitch} = useFetch("/api/pitches/" + 5 + "/");
     const history = useHistory();
-    const delete_ = {id}
+    const match_id = id;
+    const info = {match_id}
 
     const handleDelete = () => {
-        axios.post("/api/delete_match/", delete_, {headers: {
+        axios.post("/api/delete_match/", info, {headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`,
+         }})
+        .then(res=>{
+            history.push('/matches')})
+    }
+
+    const handleSign = () => {
+        axios.post("/api/sign_for_match/", info, {headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`,
          }})
         .then(res=>{
@@ -37,7 +46,7 @@ const MatchDetails = () => {
                     <p>Organizator: {match && match.organizer}</p>
                 </div>
             </div>
-            <button onClick={handleDelete}>Dołącz do wydarzenia</button>
+            <button onClick={handleSign}>Dołącz do wydarzenia</button>
             <button onClick={handleDelete}>Usuń wydarzenie</button>
         </div>
     )
