@@ -68,6 +68,7 @@ function Create() {
                     required
                     strict
                     mobile
+                    precision={ 2 } 
                     step={ 0.1 }
                     min={ 0.1 } 
                     onChange={(value) => setPrice(value)}
@@ -93,6 +94,7 @@ function Create() {
                     strict
                     mobile
                     min={ 2 } 
+                    precision={ 2 } 
                     onChange={(value) => setMax_players(value)}
                 />
                 <label></label>
