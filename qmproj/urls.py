@@ -29,6 +29,7 @@ router.register(r'pitches', views.PitchView, 'pitch')
 router.register(r'create_match', views.CreateMatchView, 'create_match')
 router.register(r'sign_for_match', views.SignForMatchView, 'sign_for_match')
 router.register(r'user_profile', views.UserProfileView, 'user_profile')
+router.register(r'delete_match', views.DeleteMatchView, 'delete_match')
 
 
 urlpatterns = [

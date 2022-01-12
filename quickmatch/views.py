@@ -95,7 +95,7 @@ class CreateMatchView(viewsets.ViewSet):
 
 class SignForMatchView(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
-    serializer_class = SignFoMatchSerializer
+    serializer_class = SignForMatchSerializer
 
     def create(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
@@ -118,6 +118,26 @@ class SignForMatchView(viewsets.ViewSet):
             #     print(p)
         
         return Response(MatchSerializer(match).data, status=status.HTTP_201_CREATED)
+
+class DeleteMatchView(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = DeleteMatchSerializer
+
+    def create(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            match_id = serializer.data.get('match_id')
+            match = Match.objects.get(id=match_id)
+            user = MyUser.objects.get(id=self.request.user.id)
+            if user==match.organizer:
+                for p in match.players.all():
+                    p.user_matches.remove(match)
+                    p.save()
+                match.delete()
+                return Response(MyUserSerializer(user).data, status=status.HTTP_200_OK)
+
+            return Response(MatchSerializer(match).data, status=status.HTTP_403_FORBIDDEN)
+        
             
 class PitchView(viewsets.ViewSet):
     def list(self, request):
