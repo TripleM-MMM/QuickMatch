@@ -157,12 +157,15 @@ class MyUserView(viewsets.ModelViewSet):
     serializer_class = MyUserSerializer
     queryset = MyUser.objects.all()
 
-class UserProfileView(viewsets.ViewSet):
+class UserProfileView(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = MyUserSerializer
 
     def list(self, request, pk=None, format=None):
-        user = MyUser.objects.get(id=self.request.user.id)
+        try:
+            user = MyUser.objects.get(id=self.request.user.id)
+        except MyUser.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = MyUserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
