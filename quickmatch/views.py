@@ -47,10 +47,8 @@ from rest_framework.permissions import IsAuthenticated
 
 # Views for matches
 class MatchView(viewsets.ViewSet):
-    def list(self, request):
-        queryset = Match.objects.all()
-        serializer = MatchSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    serializer_class = MatchSerializer
+    queryset = Match.objects.all()
         
 
 #@login_required(login_url='/login/')
