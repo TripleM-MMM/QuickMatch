@@ -37,3 +37,4 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         model = MyUser
         #fields = ('token', 'username', 'password')
         fields = ('token','id', 'username', 'first_name', 'last_name', 'email', 'password', 'user_matches')
+

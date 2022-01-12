@@ -121,11 +121,9 @@ class App extends Component {
 
     return (
       <div className="App">
-
-        
         <>
     <Router>
-      
+
       <Navbar />
       <Switch>
         <Route exact path='/'>
@@ -144,7 +142,18 @@ class App extends Component {
           <Create />
         </Route>
         <Route exact path='/login'>
-          <Login />
+          {/* <Login /> */}
+          <Nav
+          logged_in={this.state.logged_in}
+          display_form={this.display_form}
+          handle_logout={this.handle_logout}
+        />
+        {form}
+        <h3>
+          {this.state.logged_in
+            ? `Witaj, ${this.state.username}`
+            : 'Proszę, zaloguj się !'}
+        </h3>
         </Route>
         <Route exact path='/contact'>
           <Contact />
@@ -155,19 +164,7 @@ class App extends Component {
       </Switch>
     </Router>
     </>
-
-        <Nav
-          logged_in={this.state.logged_in}
-          display_form={this.display_form}
-          handle_logout={this.handle_logout}
-        />
-      
-        {form}
-        <h3>
-          {this.state.logged_in
-            ? `Hello, ${this.state.username}`
-            : 'Please Log In'}
-        </h3>
+    
       </div>
     );
   }
