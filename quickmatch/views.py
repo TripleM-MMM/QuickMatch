@@ -71,7 +71,11 @@ class CreateMatchView(viewsets.ViewSet):
             #organizer = MyUser.objects.create(username="JOHN1", email="JOHN1@gmail.com", password="JOHN1X")
             # organizer = MyUser() # MUST BE AN EXISTING MYUSER INSTANCE
             # organizer.save() # MUST BE AN EXISTING MYUSER INSTANCE
-            print(self.request.user.id)
+            # print(self.request.user.id)
+
+            if max_players <= 1:
+                return Response(MyUserSerializer(organizer).data, status=status.HTTP_406_NOT_ACCEPTABLE)
+
             signed_players = 1
             match = Match(pitch=pitch, price=price, organizer=organizer, date=date, description=description, signed_players=signed_players, max_players=max_players)
             match.save()
@@ -102,7 +106,11 @@ class SignForMatchView(viewsets.ViewSet):
             match = Match.objects.get(id=match_id)
             user = MyUser.objects.get(id=self.request.user.id)
             # check if match is full or user already signed in:
-            if (match.signed_players==match.max_players) or (match.players.get(id=user.id)!=None):
+            try:
+                exists = match.players.get(id=user.id)
+            except MyUser.DoesNotExist:
+                exists = None
+            if (match.signed_players==match.max_players) or (exists!=None):
                 return Response(MatchSerializer(match).data, status=status.HTTP_304_NOT_MODIFIED)
             match.players.add(user)
             #user.user_matches.add(match)
