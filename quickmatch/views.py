@@ -130,7 +130,7 @@ class SignForMatchView(viewsets.ViewSet):
                 exists = None
 
             if (match.signed_players==match.max_players) or (exists!=None):
-                return Response(MatchSerializer(match).data, status=status.HTTP_304_NOT_MODIFIED)
+                return Response(MatchSerializer(match).data, status=status.HTTP_403_FORBIDDEN)
             match.players.add(user)
             #user.user_matches.add(match)
             match.signed_players = match.signed_players + 1
