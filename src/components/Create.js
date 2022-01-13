@@ -5,6 +5,8 @@ import 'react-datepicker/dist/react-datepicker.css'
 import {useHistory } from 'react-router-dom'
 import axios from 'axios';
 import Popup from './Popup';
+import NumericInput from 'react-numeric-input';
+import useFetch from './useFetch';
 
 
 function Create() {
@@ -14,11 +16,11 @@ function Create() {
       history.go(-1)
     }
     
-    const [pitch, setPitch] = useState(5)
-    const [price, setPrice] = useState('')
+    const [pitch, setPitch] = useState(3)
+    const [price, setPrice] = useState('0')
     const [date, setDate] = useState(null)
     const [description, setDescription] = useState('')
-    const [max_players, setMax_players] = useState('1')
+    const [max_players, setMax_players] = useState('0')
     const [isLogged, setIsLogged] = useState(localStorage.getItem('token') ? true : false)
 
     const history = useHistory()
@@ -42,6 +44,8 @@ function Create() {
             history.go(-1)
         })
     }
+
+    const {data: pitches} = useFetch("/api/pitches/");
     
     return (
         <div className="create">
@@ -51,17 +55,23 @@ function Create() {
                 <select
                     required
                     value={pitch}
-                    onChange={(e) => setPitch()}
+                    onChange={(e) => setPitch(e.target.value)}
                 >
-                    <option value="MS AGH">MS AGH</option>
-                    <option value="COM COM">COM COM</option>
+                    {pitches && pitches.map((pitch_) => (
+                        <option value={pitch_.id}>{pitch_.name}</option>
+                    ))}
+                    {/* // <option value="MS AGH">MS AGH</option>
+                    // <option value="COM COM">COM COM</option> */}
                 </select>
                 <label>Cena: </label>
-                <input
-                    type="text"
+                <NumericInput className='form-control'
                     required
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
+                    strict
+                    mobile
+                    precision={ 2 } 
+                    step={ 0.1 }
+                    min={ 0.1 } 
+                    onChange={(value) => setPrice(value)}
                 />
                 <label>Data: </label>
                 <DatePicker 
@@ -79,13 +89,16 @@ function Create() {
                     onChange={(e) => setDescription(e.target.value)}
                 />
                 <label>Liczba osób: </label>
-                <input
-                    type="text"
+                <NumericInput className='form-control'
                     required
-                    value={max_players}
-                    onChange={(e) => setMax_players(e.target.value)}
+                    strict
+                    mobile
+                    min={ 2 } 
+                    precision={ 2 } 
+                    onChange={(value) => setMax_players(value)}
                 />
-                <button>Dodaj wydarzenie</button>
+                <label></label>
+                <button className='add'>Dodaj wydarzenie</button>
                 {!isLogged && <Popup
                 content={<>
                     <b>Musisz być zalogowany !</b>

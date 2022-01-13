@@ -24,7 +24,9 @@
     box-sizing: border-box;
     display: block;
   }
-  .create button {
+  .create .add {
+    margin-top: 50px;
+    width: 100%;
     background: #f1356d;
     color: #fff;
     border: 0;
@@ -32,3 +34,6 @@
     border-radius: 8px;
     cursor: pointer;
   }
+
+
+  
