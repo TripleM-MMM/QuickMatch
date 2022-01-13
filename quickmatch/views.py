@@ -173,7 +173,7 @@ class SignOutFromMatchView(viewsets.ViewSet):
             except MyUser.DoesNotExist:
                 exists = None
 
-            if (exists!=None) and (match.date > datetime.now()):
+            if (exists!=None) and (match.date>datetime.now() and (user!=match.organizer)):
                 # remove user from match
                 match.players.remove(user)
                 match.signed_players = match.signed_players - 1
