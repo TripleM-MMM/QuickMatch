@@ -12,6 +12,7 @@ from rest_framework import authentication, permissions
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.permissions import IsAuthenticated
+from datetime import datetime
 
 # Create your views here.
 #def hello_world(request): # NEW
@@ -146,6 +147,48 @@ class SignForMatchView(viewsets.ViewSet):
             #     print(p)
         
         return Response(MatchSerializer(match).data, status=status.HTTP_201_CREATED)
+
+class SignOutFromMatchView(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
+    serializer_class = SignOutFromMatchSerializer
+
+    def create(self, request, format=None):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            match_id = serializer.data.get('match_id')
+
+            try:
+                match = Match.objects.get(id=match_id)
+            except Match.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+
+            try:
+                user = MyUser.objects.get(id=self.request.user.id)
+            except MyUser.DoesNotExist:
+                return Response(status=status.HTTP_404_NOT_FOUND)
+            
+            # check if match is full or user already signed in:
+            try:
+                exists = match.players.get(id=user.id)
+            except MyUser.DoesNotExist:
+                exists = None
+
+            if (exists!=None) and (match.date > datetime.now()):
+                # remove user from match
+                match.players.remove(user)
+                match.signed_players = match.signed_players - 1
+                match.save()
+                user.save()
+                return Response(MatchSerializer(match).data, status=status.HTTP_200_OK)
+            # print("User matches:")
+            # for m in user.user_matches.all():
+            #     print(m)
+            # print("Players for m:")
+            # print(m)
+            # for p in match.players.all():
+            #     print(p)
+        
+        return Response(MatchSerializer(match).data, status=status.HTTP_403_FORBIDDEN)
 
 class DeleteMatchView(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]

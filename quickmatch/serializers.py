@@ -15,6 +15,9 @@ class CreateMatchSerializer(serializers.ModelSerializer):
 class SignForMatchSerializer(serializers.Serializer):
     match_id = serializers.IntegerField()
 
+class SignOutFromMatchSerializer(serializers.Serializer):
+    match_id = serializers.IntegerField()
+
 class DeleteMatchSerializer(serializers.Serializer):
     match_id = serializers.IntegerField()
 
