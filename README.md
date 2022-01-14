@@ -29,6 +29,7 @@ npm start
 python manage.py test
 ```
 # 3. Użyte technologie licencje
-| Technologia | Licencja
-| Python 3.9.7 | 
-| Django 3.2.9 | 
+| Technologia | Licencja |
+|:------------|---------:|
+| Python 3.9.7 |         |
+| Django 3.2.9 |         |
