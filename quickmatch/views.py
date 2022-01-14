@@ -269,8 +269,9 @@ class EditUserProfileView(viewsets.ViewSet):
             user.first_name = new_first_name
             user.last_name = new_last_name
             user.email = new_email
-            user.password = new_password
-            #user.set_password(new_password)
+            
+            # user.password = new_password
+            user.set_password(new_password)
 
             user.save()
 
