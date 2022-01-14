@@ -7,6 +7,7 @@ import axios from 'axios';
 import Popup from './Popup';
 import NumericInput from 'react-numeric-input';
 import useFetch from './useFetch';
+import moment from 'moment';
 
 
 function Create() {
@@ -81,6 +82,7 @@ function Create() {
                     timeInputLabel="Time:"
                     dateFormat="MM/dd/yyyy h:mm aa"
                     showTimeInput
+                    minDate={moment().toDate()}
                 />
                 <label>Opis: </label>
                 <textarea

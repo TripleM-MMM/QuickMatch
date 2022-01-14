@@ -47,14 +47,14 @@ const Profile = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        const user = {username, first_name, last_name, email, password};  
+        const user = {first_name, last_name, email, password};  
         console.log(user);
         axios.post("/api/edit_user_profile/", user, {headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`,
          }})  
         .then(res=>{
             console.log(user);
-            history.go(-1)})
+            window.location.reload(false)})
     }
 
     const handleDelete = (event) => {
@@ -74,6 +74,7 @@ const Profile = () => {
           })
         .then(res=>{
             console.log(info)
+            window.location.reload(false);
         })
     }
 
