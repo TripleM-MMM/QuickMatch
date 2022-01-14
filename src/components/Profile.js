@@ -53,8 +53,28 @@ const Profile = () => {
             Authorization: `JWT ${localStorage.getItem('token')}`,
          }})  
         .then(res=>{
-            console.log(res);
+            console.log(user);
             history.go(-1)})
+    }
+
+    const handleDelete = (event) => {
+        const match_id = event.target.getAttribute('data-arg1');
+        const info = {match_id};
+        axios.post("/api/sign_out_from_match/", info, {headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`,
+         }})
+         .catch(function (error) {
+            if (error.response) {
+              console.log(error.response.status);
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log('Error', error.message);
+            }
+            console.log(error.config);
+          })
+        .then(res=>{
+            console.log(info)
+        })
     }
 
     return (
@@ -67,17 +87,17 @@ const Profile = () => {
                     <p>Nazwa użytkownika: {info && info.username}</p>
                     <p>Imię: {info && info.first_name}</p>
                     <p>Nazwisko: {info && info.last_name}</p>
-                    <p>Email: {info && info.email}</p>
+                    <p>email: {info && info.email}</p>
                     <h3>Mecze</h3>
                     {listOfMatches.map((match) => (
                 <div className='match-preview' key={match.id}>
-                    <button className='match-date'> Data: {match.date.slice(0,10)} Godzina : {match.date.slice(11,16)}</button>
+                    <button className='match-date' onClick={handleDelete} data-arg1={match.id}> Data: {match.date.slice(0,10)} Godzina : {match.date.slice(11,16)} - ZREZYGNUJ</button>
                 </div>
             ))}
             </div>
             <h2 className='edit'>Edytuj profil</h2>
             <form onSubmit={handleSubmit}>
-                <label>Email: </label>
+                <label>email: </label>
                 <input
                     type="text"
                     required
