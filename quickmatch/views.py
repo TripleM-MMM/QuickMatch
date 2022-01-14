@@ -84,7 +84,7 @@ class CreateMatchView(viewsets.ViewSet):
             # organizer.save() # MUST BE AN EXISTING MYUSER INSTANCE
             # print(self.request.user.id)
 
-            if max_players <= 1:
+            if (max_players <= 1) or (date<timezone.now()):
                 return Response(MyUserSerializer(organizer).data, status=status.HTTP_406_NOT_ACCEPTABLE)
 
             signed_players = 1
@@ -131,7 +131,7 @@ class SignForMatchView(viewsets.ViewSet):
             except MyUser.DoesNotExist:
                 exists = None
 
-            if (match.signed_players==match.max_players) or (exists!=None):
+            if (match.signed_players==match.max_players) or (exists!=None) or (match.date<timezone.now()):
                 return Response(MatchSerializer(match).data, status=status.HTTP_403_FORBIDDEN)
             match.players.add(user)
             #user.user_matches.add(match)
