@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.permissions import IsAuthenticated
 from datetime import datetime
+from django.utils import timezone
 
 # Create your views here.
 #def hello_world(request): # NEW
@@ -173,7 +174,7 @@ class SignOutFromMatchView(viewsets.ViewSet):
             except MyUser.DoesNotExist:
                 exists = None
 
-            if (exists!=None) and (match.date>datetime.now() and (user!=match.organizer)):
+            if (exists!=None) and (match.date>timezone.now() and (user!=match.organizer)):
                 # remove user from match
                 match.players.remove(user)
                 match.signed_players = match.signed_players - 1
