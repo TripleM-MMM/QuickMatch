@@ -1,9 +1,32 @@
+.profile .info p {
+  position: relative;
+  bottom: -20px;
+  right: 0px;
+  color: white;
+
+  text-align: left;
+  display: block;
+}
+
+.profile h3 {
+  position: relative;
+  bottom: -20px;
+  right: 0px;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+  display: block;
+}
 
 .profile {
     max-width: 400px;
     margin: 0 auto;
     text-align: center;
+    color: white;
   }
+  
+
   .profile label {
     position: relative;
     bottom: -20px;
@@ -13,11 +36,11 @@
     text-align: left;
     display: block;
   }
-  .profile h2 {
+
+.profile h2 {
     position: relative;
     bottom: -20px;
     right: 0px;
-
     margin: auto;
     text-align: center;
     padding: 10px;
@@ -26,7 +49,20 @@
     border: 0;
     background: rgb(196, 129, 216);
   }
-  .profile input, .profile select, .profile textarea{
+
+.profile .header {
+  margin-bottom: 20px;
+}
+
+.profile .edit {
+  margin-bottom: 20px;
+}
+
+.profile .matches {
+  color: white;
+}
+
+.profile input, .profile select, .profile textarea{
     position: relative;
     bottom: -20px;
     right: 0px;
@@ -38,7 +74,7 @@
     box-sizing: border-box;
     display: block;
   }
-  .profile button {
+.profile .save {
     position: relative;
     bottom: -20px;
     right: 0px;
@@ -52,10 +88,27 @@
     cursor: pointer;
   }
 
-  .profile img{
+.profile img{
     left: 0px;
     object-fit: cover;  
     width: 100%;
     height: 100%;
     position: fixed;  
+}
+
+.profile .info button {
+  position: relative;
+  right: 0px;
+  color: white;
+  text-align: left;
+  display: block;
+  margin-top: 10px;
+
+  background: #df6819;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  color: white;
 }
