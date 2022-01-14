@@ -2,7 +2,7 @@
 at https://quick-match.herokuapp.com/hello/
 
 > ### 1. [Jak uruchomić](https://github.com/TripleM-MMM/QuickMatch/blob/main/README.md#1-jak-uruchomi%C4%87-1)
-> ### 2. [Uruchamianie testów](#project-documentation-on-overleaf)  
+> ### 2. [Uruchamianie testów](https://github.com/TripleM-MMM/QuickMatch/blob/main/README.md#2-uruchamianie-test%C3%B3w-1)  
 > ### 3. [Licencje](#project-licence---mit)
 
 # 1. Jak uruchomić
