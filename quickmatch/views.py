@@ -259,13 +259,11 @@ class EditUserProfileView(viewsets.ViewSet):
             except MyUser.DoesNotExist:
                 return Response(status=status.HTTP_404_NOT_FOUND)
                 
-            new_username = serializer.data.get('username')
             new_first_name = serializer.data.get('first_name')
             new_last_name = serializer.data.get('last_name')
             new_email = serializer.data.get('email')
             new_password = serializer.data.get('password')
             
-            user.username = new_username
             user.first_name = new_first_name
             user.last_name = new_last_name
             user.email = new_email
