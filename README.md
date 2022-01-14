@@ -19,3 +19,7 @@ python manage.py runserver
 ```
 npm start
 ```
+# Uruchamianie testów
+```
+python manage.py test
+```
