@@ -1,7 +1,7 @@
 # QuickMatch
 at https://quick-match.herokuapp.com/hello/
 
-> ### 1. [Jak uruchomić](#initial-setup)
+> ### 1. [Jak uruchomić](https://github.com/TripleM-MMM/QuickMatch/blob/main/README.md#1-jak-uruchomi%C4%87-1)
 > ### 2. [Uruchamianie testów](#project-documentation-on-overleaf)  
 > ### 3. [Licencje](#project-licence---mit)
 
