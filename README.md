@@ -1,7 +1,7 @@
 # QuickMatch
 at https://quick-match.herokuapp.com/hello/
 # Jak uruchomić
-Po skolonowaniu kodu repozytorium, ale wykonać poniższe kroki. Wszystkie komendy uruchamiamy z poziomy katalogu głównego.
+Po skolonowaniu kodu repozytorium, należy wykonać poniższe kroki. Wszystkie komendy uruchamiamy z poziomy katalogu głównego.
 ## Instalacja niezbędnych pakietów
 Instalacja pakietów npm poleceniem:
 ```
