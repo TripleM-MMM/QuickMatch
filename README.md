@@ -1,8 +1,13 @@
 # QuickMatch
 at https://quick-match.herokuapp.com/hello/
-# Jak uruchomić
+
+> ### 1. [Jak uruchomić](#initial-setup)
+> ### 2. [Uruchamianie testów](#project-documentation-on-overleaf)  
+> ### 3. [Licencje](#project-licence---mit)
+
+# 1. Jak uruchomić
 Po skolonowaniu kodu repozytorium, należy wykonać poniższe kroki. Wszystkie komendy uruchamiamy z poziomy katalogu głównego.
-## Instalacja niezbędnych pakietów
+## 1.1. Instalacja niezbędnych pakietów
 Instalacja pakietów npm poleceniem:
 ```
 npm install
@@ -11,15 +16,16 @@ Instalacja pakietow django poleceniem:
 ```
 pip install -r requirements.txt
 ```
-## Uruchomienie serwera
+## 1.2. Uruchomienie serwera
 ```
 python manage.py runserver
 ```
-## Uruchomienie aplikacji
+## 1.3. Uruchomienie aplikacji
 ```
 npm start
 ```
-# Uruchamianie testów
+# 2. Uruchamianie testów
 ```
 python manage.py test
 ```
+# 3. Licencje
