@@ -54,7 +54,7 @@ const Profile = () => {
          }})  
         .then(res=>{
             console.log(user);
-            history.go(-1)})
+            window.location.reload(false)})
     }
 
     const handleDelete = (event) => {
