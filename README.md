@@ -1,6 +1,6 @@
 # QuickMatch
 at https://quick-match.herokuapp.com/hello/
-# Instrukcja uruchomienia
+# Jak uruchomić
 ## Instalacja niezbędnych pakietów
 Instalacja pakietów npm poleceniem:
 ```
