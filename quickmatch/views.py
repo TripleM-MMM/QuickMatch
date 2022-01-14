@@ -50,6 +50,11 @@ from django.utils import timezone
 # Views for matches
 class MatchView(viewsets.ModelViewSet):
     serializer_class = MatchSerializer
+    # q = []
+    # for m in Match.objects.all():
+    #     if m.date >= timezone.now():
+    #         q.append(m.id)
+    # queryset = Match.objects.filter(id__in=q)
     queryset = Match.objects.all()
         
 
@@ -84,7 +89,7 @@ class CreateMatchView(viewsets.ViewSet):
             # organizer.save() # MUST BE AN EXISTING MYUSER INSTANCE
             # print(self.request.user.id)
 
-            if (max_players <= 1) or (date<timezone.now()):
+            if (max_players <= 1) or (datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ')<datetime.now()):
                 return Response(MyUserSerializer(organizer).data, status=status.HTTP_406_NOT_ACCEPTABLE)
 
             signed_players = 1
@@ -210,7 +215,7 @@ class DeleteMatchView(viewsets.ViewSet):
             except MyUser.DoesNotExist:
                 return Response(status=status.HTTP_404_NOT_FOUND)
             
-            if user==match.organizer:
+            if (user==match.organizer) and (match.date>timezone.now()):
                 for p in match.players.all():
                     p.user_matches.remove(match)
                     p.save()
