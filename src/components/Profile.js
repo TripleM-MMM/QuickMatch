@@ -47,15 +47,18 @@ const Profile = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        const user = {first_name, last_name, email, password, confirm_password};  
-        console.log(user);
-        axios.post("/api/edit_user_profile/", user, {headers: {
-            Authorization: `JWT ${localStorage.getItem('token')}`,
-         }})  
-        .then(res=>{
+        if (confirm_password == password) {
+            const user = {first_name, last_name, email, password};  
             console.log(user);
-            window.location.reload(false)})
+            axios.post("/api/edit_user_profile/", user, {headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`,
+            }})  
+            .then(res=>{
+                console.log(user);
+                window.location.reload(false)})
+        } else {
+            window.location.reload(false)
+        }
     }
 
     const handleDelete = (event) => {
@@ -80,6 +83,9 @@ const Profile = () => {
     }
 
     return (
+        <div       style={{
+            backgroundColor: 'black',
+          }}>
         <div className="profile"> 
             <div className="img">
                 <img src="/static/stadium.jpg"/>
@@ -102,33 +108,35 @@ const Profile = () => {
                 <label>email: </label>
                 <input
                     type="text"
-                    
+                    required
                     value={email}
                     onChange={(e) => setemail(e.target.value)}
                 />
                 <label>Imie: </label>
                 <input
                     type="text"
-                    
+                    required
                     value={first_name}
                     onChange={(e) => setName(e.target.value)}
                 />
                 <label>Nazwisko: </label>
                 <input
                     type="text"
-                    
+                    required
                     value={last_name}
                     onChange={(e) => setLastName(e.target.value)}
                 />
                 <label>Hasło: </label>
                 <input
                     type="password"
+                    required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <label>Potwierdź hasło: </label>
                 <input
                     type="password"
+                    required
                     value={confirm_password}
                     onChange={(e) => setConfirm(e.target.value)}
                 />
@@ -141,6 +149,7 @@ const Profile = () => {
                     handleClose={togglePopup}
                 />}
             </form>
+        </div>
         </div>
     );
 }
