@@ -26,6 +26,20 @@
     border: 0;
     background: rgb(196, 129, 216);
   }
+
+  .login h3 {
+    position: relative;
+    bottom: -20px;
+    right: 0px;
+
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    width: 350px;
+    border: 0;
+    background: rgb(226, 196, 151);
+  }
   .login input, .login select, .login textarea{
     position: relative;
     bottom: -20px;
