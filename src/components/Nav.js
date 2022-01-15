@@ -10,8 +10,8 @@ function Nav(props) {
   const logged_out_nav = (
       
     <ul>
-      <li onClick={() => props.display_form('login')}>login</li>
-      <li onClick={() => props.display_form('signup')}>signup</li>
+      <li onClick={() => props.display_form('login')}>Logowanie</li>
+      <li onClick={() => props.display_form('signup')}>Rejestracja</li>
       
     </ul>
 
@@ -19,7 +19,7 @@ function Nav(props) {
 
   const logged_in_nav = (
     <ul>
-      <li onClick={props.handle_logout}>logout</li>
+      <li onClick={props.handle_logout}>Wyloguj się</li>
     </ul>
   );
   return <div>{props.logged_in ? logged_in_nav : logged_out_nav}</div>;
