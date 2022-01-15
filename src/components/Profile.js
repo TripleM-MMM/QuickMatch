@@ -32,21 +32,21 @@ const Profile = () => {
 
     console.log(myJSON[0])
 
-    const [email, setemail] = useState(info && info.email)
-    // const [username, setUsername] = useState(info && info.username)
-    const [first_name, setName] = useState(info && info.first_name)
-    const [last_name, setLastName] = useState(info && info.last_name)
-    const [password, setPassword] = useState('asdas')
-
     const [isLogged, setIsLogged] = useState(localStorage.getItem('token') ? true : false)
     const togglePopup = () => {
         history.go(-1)
     }
 
     const history = useHistory()
+
+    const [email, setemail] = useState(info && info.email)
+    const [first_name, setName] = useState(info && info.first_name)
+    const [last_name, setLastName] = useState(info && info.last_name)
+    const [password, setPassword] = useState(info && info.password)
     
     const handleSubmit = (e) => {
         e.preventDefault();
+
         const user = {first_name, last_name, email, password};  
         console.log(user);
         axios.post("/api/edit_user_profile/", user, {headers: {
@@ -101,31 +101,30 @@ const Profile = () => {
                 <label>email: </label>
                 <input
                     type="text"
-                    required
+                    
                     value={email}
                     onChange={(e) => setemail(e.target.value)}
                 />
                 <label>Imie: </label>
                 <input
                     type="text"
-                    required
+                    
                     value={first_name}
                     onChange={(e) => setName(e.target.value)}
                 />
                 <label>Nazwisko: </label>
                 <input
                     type="text"
-                    required
+                    
                     value={last_name}
                     onChange={(e) => setLastName(e.target.value)}
                 />
-                {/* <label>Hasło: </label>
+                <label>Hasło: </label>
                 <input
                     type="password"
-                    required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                /> */}
+                />
 
                 <button className='save'>Zapisz</button>
                 {!isLogged && <Popup
