@@ -268,7 +268,11 @@ class EditUserProfileView(viewsets.ViewSet):
             new_last_name = serializer.data.get('last_name')
             new_email = serializer.data.get('email')
             new_password = serializer.data.get('password')
+            confirm_new_password = serializer.data.get('confirm_password')
             
+            if confirm_new_password != new_password:
+                return Response(serializer.data, status=status.HTTP_406_NOT_ACCEPTABLE)
+
             user.first_name = new_first_name
             user.last_name = new_last_name
             user.email = new_email
