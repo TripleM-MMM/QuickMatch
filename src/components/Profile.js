@@ -43,11 +43,12 @@ const Profile = () => {
     const [first_name, setName] = useState(info && info.first_name)
     const [last_name, setLastName] = useState(info && info.last_name)
     const [password, setPassword] = useState(info && info.password)
+    const [confirm_password, setConfirm] = useState()
     
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const user = {first_name, last_name, email, password};  
+        const user = {first_name, last_name, email, password, confirm_password};  
         console.log(user);
         axios.post("/api/edit_user_profile/", user, {headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`,
@@ -124,6 +125,12 @@ const Profile = () => {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                />
+                <label>Potwierdź hasło: </label>
+                <input
+                    type="password"
+                    value={confirm_password}
+                    onChange={(e) => setConfirm(e.target.value)}
                 />
 
                 <button className='save'>Zapisz</button>
