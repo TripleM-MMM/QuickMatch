@@ -1,16 +1,11 @@
 import './Contact.css'
-import {useState} from 'react';
-import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import {useHistory } from 'react-router-dom'
-import axios from 'axios';
-
 
 function Contact() {
     return (
         <div className='contact'>
             <div className="background">
-                <img src="/static/main_background.jpg"/>
+                <img src="/static/main_background.jpg" alt='footbal_pitch'/>
             </div>
             <div classname="information">
                 <p>Jeśli chcesz dodać boisko, napisz do nas:</p>

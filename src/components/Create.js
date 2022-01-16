@@ -10,9 +10,7 @@ import useFetch from './useFetch';
 import moment from 'moment';
 
 
-function Create() {
-    const [isOpen, setIsOpen] = useState(false);
- 
+function Create() { 
     const togglePopup = () => {
       history.go(-1)
     }
@@ -22,7 +20,7 @@ function Create() {
     const [date, setDate] = useState(null)
     const [description, setDescription] = useState('')
     const [max_players, setMax_players] = useState('0')
-    const [isLogged, setIsLogged] = useState(localStorage.getItem('token') ? true : false)
+    let isLogged = localStorage.getItem('token') ? true : false
 
     const history = useHistory()
 
@@ -36,10 +34,8 @@ function Create() {
             if (error.response) {
               console.log(error.response.status);
             } else {
-              // Something happened in setting up the request that triggered an Error
               console.log('Error', error.message);
             }
-            console.log(error.config);
           })
         .then(res=>{
             history.go(-1)
@@ -61,8 +57,6 @@ function Create() {
                     {pitches && pitches.map((pitch_) => (
                         <option value={pitch_.id}>{pitch_.name}</option>
                     ))}
-                    {/* // <option value="MS AGH">MS AGH</option>
-                    // <option value="COM COM">COM COM</option> */}
                 </select>
                 <label>Cena: </label>
                 <NumericInput className='form-control'
@@ -102,10 +96,10 @@ function Create() {
                 <label></label>
                 <button className='add'>Dodaj wydarzenie</button>
                 {!isLogged && <Popup
-                content={<>
-                    <b>Musisz być zalogowany !</b>
-                    </>}
-                    handleClose={togglePopup}
+                                content={<>
+                                    <b>Musisz być zalogowany !</b>
+                                    </>}
+                                handleClose={togglePopup}
                 />}
             </form>
         </div>

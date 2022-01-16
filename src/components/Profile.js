@@ -1,6 +1,5 @@
 import './Profile.css' 
-import { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker'
+import { useState } from 'react';
 import 'react-datepicker/dist/react-datepicker.css'
 import {useHistory } from 'react-router-dom'
 import axios from 'axios';
@@ -12,7 +11,6 @@ import moment from 'moment';
 
 const Profile = () => {
     const {data: info} = useFetchAuthorized("/api/user_profile/");
-    let username = info && info.username;
 
     let user_matches = info && info.user_matches
 
@@ -38,7 +36,7 @@ const Profile = () => {
         setIsOpen2(!isOpen2);
     }
 
-    const [isLogged, setIsLogged] = useState(localStorage.getItem('token') ? true : false)
+    let isLogged = localStorage.getItem('token') ? true : false
     const togglePopup = () => {
         history.go(-1)
     }
@@ -53,7 +51,7 @@ const Profile = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (confirm_password == password) {
+        if (confirm_password === password) {
             const user = {first_name, last_name, email, password};  
             console.log(user);
             axios.post("/api/edit_user_profile/", user, {headers: {
@@ -94,7 +92,7 @@ const Profile = () => {
           }}>
         <div className="profile"> 
             <div className="img">
-                <img src="/static/stadium.jpg"/>
+                <img src="/static/stadium.jpg" alt='stadium'/>
             </div> 
             <div className='info'>
                 <h2 className='header'>Profil</h2>

@@ -1,12 +1,8 @@
 import './Login.css' //
 import {useState} from 'react';
-import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import {useHistory } from 'react-router-dom'
 import axios from 'axios';
-
-
-
 
 
 function Login() {
@@ -16,23 +12,11 @@ function Login() {
     const [last_name, setLastName] = useState('')
     const [password, setPassword] = useState('')
 
-    const [user_matches, setUserMatches] = useState('')
-
     const history = useHistory()
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const user = {username, first_name, last_name, email, password, user_matches};  //
-
-    // fetch('http://localhost:8000/matches',  {
-    //     method: 'POST',
-    //     headers: { "Content-type": "application/json"},
-    //     body: JSON.stringify(match) 
-    // }).then( () => {
-    //     console.log('new match added');
-    //     history.go(-1);
-    // })
-
+        const user = {username, first_name, last_name, email, password};  //
 
         axios.post("/api/users/", user)  //
         .then(res=>{
@@ -46,7 +30,7 @@ function Login() {
         <div className="login"> 
 
 <           div className="img">
-                <img src="/static/background_.jpg"/>
+                <img src="/static/background_.jpg" alt='background'/>
             </div> 
 
             <h2>Rejestracja do QuickMatch</h2>

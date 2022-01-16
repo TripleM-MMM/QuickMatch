@@ -1,10 +1,6 @@
 import React, {useState} from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import App from '../App';
-
-
 
 function Navbar() {
 
@@ -25,7 +21,7 @@ function Navbar() {
     return(
         <nav className='navbar'>
             <Link to='/' className='logo-link'>
-                <img src="/static/logo.png"/>
+                <img src="/static/logo.png" alt='logo'/>
             </Link>
             <div className='links'>
                 <Link to='/matches'>Mecze</Link>

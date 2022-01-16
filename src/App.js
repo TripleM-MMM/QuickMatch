@@ -15,10 +15,6 @@ import Profile from './components/Profile';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
-import {useState} from 'react';
-
-
-
 
 class App extends Component {
 
@@ -128,66 +124,54 @@ class App extends Component {
 
     return (
       <div className="App">
-        <>
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route exact path='/'>
-          <Home />
-        </Route>
-        <Route exact path='/matches'>
-          <Matches />
-        </Route>
-        <Route exact path='/matches/:id'>
-          <MatchDetails />
-        </Route>
-        <Route exact path='/pitches'>
-          <Pitches />
-        </Route>
-        <Route exact path='/create_match'>
-          <Create />
-        </Route>
-        <Route exact path='/login'>
-          {/* <Login /> */}
-          <div className="login"> 
-            <div className="img">
-                <img src="/static/background_.jpg"/>
-            </div> 
-            <h2>QuickMatch</h2>
-        <h3>
-          <Nav
-          logged_in={this.state.logged_in}
-          display_form={this.display_form}
-          handle_logout={this.handle_logout}
-        />
-        </h3>
-        {form}
-        <h2>
-          {this.state.logged_in
-            ? `Zalogowano!`
-            : 'Musisz się zalogować !'}
-        </h2>
-            </div>
-        
-        
-    );
-    
-          
-
-
-
-
-        </Route>
-        <Route exact path='/contact'>
-          <Contact />
-        </Route>
-        <Route exact path='/profile'>
-            <Profile />
-        </Route>
-      </Switch>
-    </Router>
-    </>
-    
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route exact path='/matches'>
+              <Matches />
+            </Route>
+            <Route exact path='/matches/:id'>
+              <MatchDetails />
+            </Route>
+            <Route exact path='/pitches'>
+              <Pitches />
+            </Route>
+            <Route exact path='/create_match'>
+              <Create />
+            </Route>
+            <Route exact path='/login'>
+              {/* <Login /> */}
+              <div className="login"> 
+                <div className="img">
+                  <img src="/static/background_.jpg" alt='background'/>
+                </div> 
+                <h2>QuickMatch</h2>
+                <h3>
+                  <Nav
+                    logged_in={this.state.logged_in}
+                    display_form={this.display_form}
+                    handle_logout={this.handle_logout}
+                  />
+                </h3>
+                {form}
+                <h2>
+                  {this.state.logged_in
+                  ? `Zalogowano!`
+                  : 'Musisz się zalogować !'}
+                </h2>
+              </div>
+            </Route>
+            <Route exact path='/contact'>
+              <Contact />
+            </Route>
+            <Route exact path='/profile'>
+              <Profile />
+            </Route>
+          </Switch>
+        </Router>
       </div>
     );
   }

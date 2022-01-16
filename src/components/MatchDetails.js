@@ -28,7 +28,7 @@ const MatchDetails = () => {
     const match_id = id;
     const info = {match_id}
 
-    const [isLogged, setIsLogged] = useState(localStorage.getItem('token') ? true : false)
+    let isLogged = localStorage.getItem('token') ? true : false
     const [username, setUsername] = useState('')
     if (isLogged) {
         fetch('http://localhost:8000/core/current_user/', {
@@ -50,10 +50,8 @@ const MatchDetails = () => {
             if (error.response) {
               console.log(error.response.status);
             } else {
-              // Something happened in setting up the request that triggered an Error
               console.log('Error', error.message);
             }
-            console.log(error.config);
           })
         .then(res=>{
             history.push('/matches')
@@ -67,16 +65,15 @@ const MatchDetails = () => {
          .catch(function (error) {
             if (error.response) {
                 console.log(isOpen)
-                if (error.response.status == 403) {
+                if (error.response.status === 403) {
                     isEntered = true;
                 }
-                else if (error.response.status == 401) {
+                else if (error.response.status === 401) {
                     isAuthorized = false;
                 }
                 console.log(isOpen)
-              console.log(error.response.status);
+                console.log(error.response.status);
             } else {
-              // Something happened in setting up the request that triggered an Error
               console.log(error.status)
               console.log('Error', error.message);
             }
@@ -113,9 +110,9 @@ const MatchDetails = () => {
                 </div>
             </div>
             <div className="buttons">
-                {!(username == (organizer && organizer.username)) &&
+                {!(username === (organizer && organizer.username)) &&
                 <button onClick={handleSign}>Dołącz do wydarzenia</button>}
-                {(username == (organizer && organizer.username)) && <button onClick={handleDelete}>Usuń wydarzenie</button>}
+                {(username === (organizer && organizer.username)) && <button onClick={handleDelete}>Usuń wydarzenie</button>}
             </div>
             {isOpen && <Popup
                 content={<>
