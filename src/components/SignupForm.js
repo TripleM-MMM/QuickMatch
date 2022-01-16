@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 class SignupForm extends React.Component {
   state = {
     username: '',
-    password: ''
+    password: '',
+    email: '',
+    first_name: ''
   };
 
   handle_change = e => {
@@ -20,19 +22,33 @@ class SignupForm extends React.Component {
   render() {
     return (
       <form onSubmit={e => this.props.handle_signup(e, this.state)}>
-        <h4>Sign Up</h4>
-        <label htmlFor="username">Username</label>
+        <h4>Zarejestruj się</h4>
+        <label htmlFor="username">Nazwa użytkownika:</label>
         <input
           type="text"
           name="username"
           value={this.state.username}
           onChange={this.handle_change}
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Hasło:</label>
         <input
           type="password"
           name="password"
           value={this.state.password}
+          onChange={this.handle_change}
+        />
+        <label htmlFor="email">Email:</label>
+        <input
+          type="text"
+          name="email"
+          value={this.state.email}
+          onChange={this.handle_change}
+        />
+        <label htmlFor="first_name">Imię:</label>
+        <input
+          type="text"
+          name="first_name"
+          value={this.state.first_name}
           onChange={this.handle_change}
         />
         <input type="submit" />

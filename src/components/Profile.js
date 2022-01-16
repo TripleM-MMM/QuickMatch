@@ -32,29 +32,33 @@ const Profile = () => {
 
     console.log(myJSON[0])
 
-    const [email, setemail] = useState(info && info.email)
-    // const [username, setUsername] = useState(info && info.username)
-    const [first_name, setName] = useState(info && info.first_name)
-    const [last_name, setLastName] = useState(info && info.last_name)
-    const [password, setPassword] = useState('asdas')
-
     const [isLogged, setIsLogged] = useState(localStorage.getItem('token') ? true : false)
     const togglePopup = () => {
         history.go(-1)
     }
 
     const history = useHistory()
+
+    const [email, setemail] = useState(info && info.email)
+    const [first_name, setName] = useState(info && info.first_name)
+    const [last_name, setLastName] = useState(info && info.last_name)
+    const [password, setPassword] = useState(info && info.password)
+    const [confirm_password, setConfirm] = useState()
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        const user = {first_name, last_name, email, password};  
-        console.log(user);
-        axios.post("/api/edit_user_profile/", user, {headers: {
-            Authorization: `JWT ${localStorage.getItem('token')}`,
-         }})  
-        .then(res=>{
+        if (confirm_password == password) {
+            const user = {first_name, last_name, email, password};  
             console.log(user);
-            window.location.reload(false)})
+            axios.post("/api/edit_user_profile/", user, {headers: {
+            Authorization: `JWT ${localStorage.getItem('token')}`,
+            }})  
+            .then(res=>{
+                console.log(user);
+                window.location.reload(false)})
+        } else {
+            window.location.reload(false)
+        }
     }
 
     const handleDelete = (event) => {
@@ -79,6 +83,9 @@ const Profile = () => {
     }
 
     return (
+        <div       style={{
+            backgroundColor: 'black',
+          }}>
         <div className="profile"> 
             <div className="img">
                 <img src="/static/stadium.jpg"/>
@@ -119,13 +126,20 @@ const Profile = () => {
                     value={last_name}
                     onChange={(e) => setLastName(e.target.value)}
                 />
-                {/* <label>Hasło: </label>
+                <label>Hasło: </label>
                 <input
                     type="password"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                /> */}
+                />
+                <label>Potwierdź hasło: </label>
+                <input
+                    type="password"
+                    required
+                    value={confirm_password}
+                    onChange={(e) => setConfirm(e.target.value)}
+                />
 
                 <button className='save'>Zapisz</button>
                 {!isLogged && <Popup
@@ -135,6 +149,7 @@ const Profile = () => {
                     handleClose={togglePopup}
                 />}
             </form>
+        </div>
         </div>
     );
 }

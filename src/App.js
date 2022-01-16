@@ -14,7 +14,14 @@ import Contact from './components/Contact'
 import Profile from './components/Profile';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+
+import {useState} from 'react';
+
+
+
+
 class App extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -143,17 +150,34 @@ class App extends Component {
         </Route>
         <Route exact path='/login'>
           {/* <Login /> */}
+          <div className="login"> 
+            <div className="img">
+                <img src="/static/background_.jpg"/>
+            </div> 
+            <h2>QuickMatch</h2>
+        <h3>
           <Nav
           logged_in={this.state.logged_in}
           display_form={this.display_form}
           handle_logout={this.handle_logout}
         />
-        {form}
-        <h3>
-          {this.state.logged_in
-            ? `Witaj, ${this.state.username}`
-            : 'Proszę, zaloguj się !'}
         </h3>
+        {form}
+        <h2>
+          {this.state.logged_in
+            ? `Zalogowano!`
+            : 'Musisz się zalogować !'}
+        </h2>
+            </div>
+        
+        
+    );
+    
+          
+
+
+
+
         </Route>
         <Route exact path='/contact'>
           <Contact />

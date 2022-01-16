@@ -20,8 +20,8 @@ class LoginForm extends React.Component {
   render() {
     return (
       <form onSubmit={e => this.props.handle_login(e, this.state)}>
-        <h4>Log In</h4>
-        <label htmlFor="username">Username</label>
+        <h4>Zaloguj się</h4>
+        <label htmlFor="username">Nazwa użytkownika</label>
         <input
           type="text"
           name="username"
@@ -29,7 +29,7 @@ class LoginForm extends React.Component {
           onChange={this.handle_change}
         />
         
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Hasło</label>
         <input
           type="password"
           name="password"
