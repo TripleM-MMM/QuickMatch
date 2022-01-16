@@ -29,11 +29,17 @@ Po wykonaniu tego polecenia zostanie uruchomiony serwer aplikacji pod adresem *h
 npm start
 ```
 Po wykonaniu tego polecenia zostanie uruchomiona aplikacja pod adresem *http://localhost:3000/*
-# 2. Uruchamianie testów
+# 2. [Serwer aplikacji](http://127.0.0.1:8000/)
+W celu rozszerzenia testowania poprawności działania aplikacji po stronie serwera, możemy skorzystać z:
+* [**/api**](http://127.0.0.1:8000/api) - komunikacja na granicy warst backend/frontend
+* [**/admin**](http://127.0.0.1:8000/admin) - panel administracyjny (dostęp ograniczony)
+# 3. Aplikacja
+
+# 4. Uruchamianie testów
 ```
 python manage.py test
 ```
-# 3. Użyte technologie i licencje
+# 5. Użyte technologie i licencje
 | Technologia    | Licencja   |
 |:---------------|-----------:|
 | Python 3.9.7   | Open Source |
