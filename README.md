@@ -11,13 +11,13 @@ Po skolonowaniu kodu repozytorium, należy wykonać poniższe kroki. Wszystkie k
 * **Python** (najlepiej w wersji 3.9.7)
 * **pip**
 ## 1.1. Instalacja niezbędnych pakietów
-Instalacja pakietów npm poleceniem:
-```
-npm install
-```
 Instalacja pakietow django poleceniem:
 ```
 pip install -r requirements.txt
+```
+Instalacja pakietów npm poleceniem:
+```
+npm install
 ```
 ## 1.2. Uruchomienie serwera
 ```
