@@ -1,0 +1,22 @@
+.column1 {
+    float: left;
+    width: 50%;
+}
+
+.match_details .row1 .column1 img {
+    max-width: 100%;
+    height: auto;
+}
+
+.row1:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    height: 50px;
+}
