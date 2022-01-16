@@ -1,6 +1,35 @@
-.background img{
-    object-fit: cover;
+.contact img{
+    left: 0px;
+    object-fit: cover;   
     width: 100%;
     height: 100%;
-    position: fixed;
+    position: fixed;  
 }
+
+.contact p {
+    position: relative;
+    bottom: -20px;
+    right: 0px;
+    color: white;
+  
+    text-align: left;
+    display: block;
+}
+
+.contact h3 {
+    position: relative;
+    bottom: -20px;
+    right: 0px;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+    display: block;
+}
+
+.contact {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    color: white;
+  }

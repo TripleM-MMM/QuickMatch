@@ -8,8 +8,14 @@ import axios from 'axios';
 
 function Contact() {
     return (
-        <div className="background">
-            <img src="/static/main_background.jpg"/>
+        <div className='contact'>
+            <div className="background">
+                <img src="/static/main_background.jpg"/>
+            </div>
+            <div classname="information">
+                <p>Jeśli chcesz dodać boisko, napisz do nas:</p>
+                <p>mail: retajczyk@student.agh.edu.pl</p>
+            </div>
         </div>
     );
 }

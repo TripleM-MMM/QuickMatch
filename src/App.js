@@ -130,7 +130,6 @@ class App extends Component {
       <div className="App">
         <>
     <Router>
-
       <Navbar />
       <Switch>
         <Route exact path='/'>
