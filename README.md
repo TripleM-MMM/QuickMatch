@@ -23,16 +23,16 @@ npm install
 ```
 python manage.py runserver
 ```
-Po wykonaniu tego polecenia zostanie uruchomiony serwer aplikacji pod adresem **http://127.0.0.1:8000/**
+Po wykonaniu tego polecenia zostanie uruchomiony serwer aplikacji pod adresem **http://localhost:8000/**
 ## 1.3. Uruchomienie aplikacji
 ```
 npm start
 ```
 Po wykonaniu tego polecenia zostanie uruchomiona aplikacja pod adresem **http://localhost:3000/**
-# 2. [Serwer aplikacji](http://127.0.0.1:8000/)
+# 2. [Serwer aplikacji](http://localhost:8000/)
 W celu rozszerzenia testowania poprawności działania aplikacji po stronie serwera, możemy skorzystać ze stron:
-* [**/api**](http://127.0.0.1:8000/api) - komunikacja na granicy warst backend/frontend
-* [**/admin**](http://127.0.0.1:8000/admin) - panel administracyjny (dostęp ograniczony)
+* [**/api**](http://localhost:8000/api) - komunikacja na granicy warst backend/frontend
+* [**/admin**](http://localhost:8000/admin) - panel administracyjny (dostęp ograniczony)
 # 3. Aplikacja
 
 # 4. Uruchamianie testów
