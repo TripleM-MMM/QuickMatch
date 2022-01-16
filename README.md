@@ -23,10 +23,12 @@ npm install
 ```
 python manage.py runserver
 ```
+Po wykonaniu tego polecenia zostanie uruchomiony serwer aplikacji pod adresem *http://127.0.0.1:8000/*
 ## 1.3. Uruchomienie aplikacji
 ```
 npm start
 ```
+Po wykonaniu tego polecenia zostanie uruchomiona aplikacja pod adresem *http://localhost:3000/*
 # 2. Uruchamianie testów
 ```
 python manage.py test
