@@ -30,7 +30,7 @@ npm start
 ```
 Po wykonaniu tego polecenia zostanie uruchomiona aplikacja pod adresem *http://localhost:3000/*
 # 2. [Serwer aplikacji](http://127.0.0.1:8000/)
-W celu rozszerzenia testowania poprawności działania aplikacji po stronie serwera, możemy skorzystać z:
+W celu rozszerzenia testowania poprawności działania aplikacji po stronie serwera, możemy skorzystać ze stron:
 * [**/api**](http://127.0.0.1:8000/api) - komunikacja na granicy warst backend/frontend
 * [**/admin**](http://127.0.0.1:8000/admin) - panel administracyjny (dostęp ograniczony)
 # 3. Aplikacja
