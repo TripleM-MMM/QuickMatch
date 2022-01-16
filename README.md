@@ -7,6 +7,9 @@ at https://quick-match.herokuapp.com/hello/
 
 # 1. Jak uruchomić
 Po skolonowaniu kodu repozytorium, należy wykonać poniższe kroki. Wszystkie komendy uruchamiamy z poziomy katalogu głównego.
+**Narzędzia potrzebne do uruchomienia:**
+* Python (najlepiej w wersji 3.9.7)
+* pip
 ## 1.1. Instalacja niezbędnych pakietów
 Instalacja pakietów npm poleceniem:
 ```
