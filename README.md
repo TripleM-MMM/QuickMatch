@@ -31,5 +31,5 @@ python manage.py test
 # 3. Użyte technologie i licencje
 | Technologia    | Licencja   |
 |:---------------|-----------:|
-| Python 3.9.7   |            |
-| Django 3.2.9   |            |
+| Python 3.9.7   | Open Source |
+| Django 3.2.9   | Open Source |
