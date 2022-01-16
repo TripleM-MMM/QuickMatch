@@ -9,7 +9,7 @@ import Matches from './components/Matches';
 import Pitches from './components/Pitches';
 import Create from './components/Create';
 import MatchDetails from './components/MatchDetails';
-import Login from './components/Login';
+import './components/Login.css'
 import Contact from './components/Contact'
 import Profile from './components/Profile';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -143,7 +143,6 @@ class App extends Component {
               <Create />
             </Route>
             <Route exact path='/login'>
-              {/* <Login /> */}
               <div className="login"> 
                 <div className="img">
                   <img src="/static/background_.jpg" alt='background'/>
