@@ -13,10 +13,7 @@
     align-items: center;
     max-height: 20px;
     margin: 0 auto;
-    /* position: absolute; */
-    /* border-bottom: 1px solid #f2f2f2; */
     background-color: black;
-    /* width: 100%; */
   }
 
   .navbar .login {

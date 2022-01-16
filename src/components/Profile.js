@@ -7,6 +7,7 @@ import axios from 'axios';
 import Popup from './Popup';
 import useFetch from './useFetch';
 import useFetchAuthorized from './useFetchAuthorized';
+import moment from 'moment';
 
 
 const Profile = () => {
@@ -31,6 +32,11 @@ const Profile = () => {
     const myJSON = JSON.stringify(matches);
 
     console.log(myJSON[0])
+
+    const [isOpen2, setIsOpen2] = useState(false)
+    const togglePopup2 = () => {
+        setIsOpen2(!isOpen2);
+    }
 
     const [isLogged, setIsLogged] = useState(localStorage.getItem('token') ? true : false)
     const togglePopup = () => {
@@ -57,7 +63,7 @@ const Profile = () => {
                 console.log(user);
                 window.location.reload(false)})
         } else {
-            window.location.reload(false)
+            setIsOpen2(true)
         }
     }
 
@@ -99,7 +105,12 @@ const Profile = () => {
                     <h3>Mecze</h3>
                     {listOfMatches.map((match) => (
                 <div className='match-preview' key={match.id}>
-                    <button className='match-date' onClick={handleDelete} data-arg1={match.id}> Data: {match.date.slice(0,10)} Godzina : {match.date.slice(11,16)} - ZREZYGNUJ</button>
+                    { moment().isBefore(match.date)  ?
+                        <button className='match-date' onClick={handleDelete} data-arg1={match.id}> Data: {match.date.slice(0,10)} Godzina : {match.date.slice(11,16)} - ZREZYGNUJ</button>
+                    :
+                        <button className='match-date-past'> Data: {match.date.slice(0,10)} Godzina : {match.date.slice(11,16)}</button>
+}
+                    
                 </div>
             ))}
             </div>
@@ -126,7 +137,7 @@ const Profile = () => {
                     value={last_name}
                     onChange={(e) => setLastName(e.target.value)}
                 />
-                <label>Hasło: </label>
+                <label>Nowe lub stare hasło: </label>
                 <input
                     type="password"
                     required
@@ -148,6 +159,12 @@ const Profile = () => {
                     </>}
                     handleClose={togglePopup}
                 />}
+                {isOpen2 && <Popup
+                content={<>
+                    <b>Hasła muszą być takie same !</b>
+                    </>}
+                    handleClose={togglePopup2}
+            />}
             </form>
         </div>
         </div>

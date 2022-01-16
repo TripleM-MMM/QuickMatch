@@ -96,7 +96,7 @@
     position: fixed;  
 }
 
-.profile .info button {
+.profile .info .match-date {
   position: relative;
   right: 0px;
   color: white;
@@ -105,6 +105,23 @@
   margin-top: 10px;
 
   background: #df6819;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  color: white;
+}
+
+.profile .info .match-date-past {
+  position: relative;
+  right: 0px;
+  color: white;
+  text-align: left;
+  display: block;
+  margin-top: 10px;
+
+  background: #f1356d;
   border: 0;
   padding: 8px;
   border-radius: 8px;
