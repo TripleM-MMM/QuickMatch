@@ -1,9 +1,7 @@
 # QuickMatch
-at https://quick-match.herokuapp.com/hello/
 
 > ### 1. [Jak uruchomić](https://github.com/TripleM-MMM/QuickMatch/blob/main/README.md#1-jak-uruchomi%C4%87-1)
-> ### 2. [Uruchamianie testów](https://github.com/TripleM-MMM/QuickMatch/blob/main/README.md#2-uruchamianie-test%C3%B3w-1)  
-> ### 3. [Użyte technologie i licencje](https://github.com/TripleM-MMM/QuickMatch/blob/main/README.md#3-u%C5%BCyte-technologie-i-licencje-1)
+> ### 2. [Uruchamianie testów](https://github.com/TripleM-MMM/QuickMatch/blob/main/README.md#2-uruchamianie-test%C3%B3w-1)
 
 # 1. Jak uruchomić
 Po skolonowaniu kodu repozytorium, należy wykonać poniższe kroki. Wszystkie komendy uruchamiamy z poziomy katalogu głównego na gałęzi **main**.
@@ -34,13 +32,8 @@ W celu rozszerzenia testowania poprawności działania aplikacji po stronie serw
 * [**/api**](http://localhost:8000/api) - komunikacja na granicy warst backend/frontend
 * [**/admin**](http://localhost:8000/admin) - panel administracyjny (dostęp ograniczony)
 # 3. Aplikacja
-
+Szczegóły w pliku dokumentacji użytkownika
 # 4. Uruchamianie testów
 ```
 python manage.py test
 ```
-# 5. Użyte technologie i licencje
-| Technologia    | Licencja   |
-|:---------------|-----------:|
-| Python 3.9.7   | Open Source |
-| Django 3.2.9   | Open Source |
