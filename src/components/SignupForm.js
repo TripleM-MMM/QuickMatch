@@ -6,7 +6,8 @@ class SignupForm extends React.Component {
     username: '',
     password: '',
     email: '',
-    first_name: ''
+    first_name: '',
+    last_name: ''
   };
 
   handle_change = e => {
@@ -49,6 +50,13 @@ class SignupForm extends React.Component {
           type="text"
           name="first_name"
           value={this.state.first_name}
+          onChange={this.handle_change}
+        />
+        <label htmlFor="last_name">Nazwisko:</label>
+        <input
+          type="text"
+          name="last_name"
+          value={this.state.last_name}
           onChange={this.handle_change}
         />
         <input type="submit" />
