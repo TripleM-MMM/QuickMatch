@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from quickmatch import views # NEW
+from quickmatch import views
 from django.urls import include
 from rest_framework import routers
 from quickmatch import views
@@ -36,18 +36,7 @@ router.register(r'edit_user_profile', views.EditUserProfileView, 'edit_user_prof
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('hello/', views.hello_world), # NEW
-    # http://127.0.0.1:8000/ksiazki
-    #path("matches/", views.list_matches), # NEW
-    #path('accounts/', include('django.contrib.auth.urls')), # NEW
-    #path('accounts/profile/', views.profile_view, name='user_profile'), # NEW
-    #path('accounts/signup/', views.user_signup, name="user_signup"), # NEW
     path('api/', include(router.urls)),
-    #path('api/sign_for_match/', views.SignForMatchView.as_view({'post':'create'})),
-    #path('api/user_profile/', views.UserProfileView.as_view({'get':'retrieve'})),
-    path('login/', TemplateView.as_view(template_name='hello.html')), # to login
-    #path('create_match', views.CreateMatchView.as_view()),
-    # path('', TemplateView.as_view(template_name='index.html'))
     path('token-auth/', obtain_jwt_token),
     path('core/', include('core.urls'))
 ]

@@ -15,58 +15,17 @@ from rest_framework.permissions import IsAuthenticated
 from datetime import datetime
 from django.utils import timezone
 
-# Create your views here.
-#def hello_world(request): # NEW
-#    return render(request, template_name="hello.html")
 
-
-#def list_matches(request):
-#    matches = Match.objects.all()
-#    return render(request, template_name="matches_list.html", context={"matches": matches})
-
-
-#def profile_view(request): # NEW
-#    return render(request, template_name="view_profile.html")
-
-# def user_signup(request):
-#     if request.method == 'POST':
-#         ... # tu trzeba przetworzyć dane z formularza
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return render(request, template_name="registration/signup_complete.html")
-#     else:
-#         # tutaj obsługujemy przypadek kiedy użytkownik pierwszy raz wyświetlił stronę
-#         form = UserCreationForm()
-#         # na końcu zwracamy wyrenderowanego HTMLa
-#     return render(request, template_name="registration/signup_form.html", context={'form': form})
-
-
-# def user_signout(request):
-#     return render(request, template_name="registration/logged_out.html")
-
-# NEW - for React.js
-
-# Views for matches
 class MatchView(viewsets.ModelViewSet):
     serializer_class = MatchSerializer
-    # q = []
-    # for m in Match.objects.all():
-    #     if m.date >= timezone.now():
-    #         q.append(m.id)
-    # queryset = Match.objects.filter(id__in=q)
     queryset = Match.objects.all()
-        
 
-#@login_required(login_url='/login/')
+
 class CreateMatchView(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = CreateMatchSerializer
 
     def create(self, request, format=None):
-        # if not self.request.session.exists(self.request.session.session_key):
-        #     self.request.session.create()
-
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             try:
@@ -83,11 +42,6 @@ class CreateMatchView(viewsets.ViewSet):
                 organizer = MyUser.objects.get(id=self.request.user.id)
             except MyUser.DoesNotExist:
                 return Response(status=status.HTTP_404_NOT_FOUND)
-             # MUST BE A MYUSER INSTANCE
-            #organizer = MyUser.objects.create(username="JOHN1", email="JOHN1@gmail.com", password="JOHN1X")
-            # organizer = MyUser() # MUST BE AN EXISTING MYUSER INSTANCE
-            # organizer.save() # MUST BE AN EXISTING MYUSER INSTANCE
-            # print(self.request.user.id)
 
             if (max_players <= 1) or (datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ')<datetime.now()):
                 return Response(MyUserSerializer(organizer).data, status=status.HTTP_406_NOT_ACCEPTABLE)
@@ -98,18 +52,9 @@ class CreateMatchView(viewsets.ViewSet):
             match.players.add(organizer)
             organizer.save()
             match.save()
-
-            # print("Organizer matches:")
-            # for m in organizer.user_matches.all():
-            #     print(m)
-            # print("Players for m:")
-            # print(m)
-            # for p in match.players.all():
-            #     print(p)
-
-            #organizer.user_matches.add(match)
         
         return Response(MatchSerializer(match).data, status=status.HTTP_201_CREATED)
+
 
 class SignForMatchView(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
@@ -119,7 +64,6 @@ class SignForMatchView(viewsets.ViewSet):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             match_id = serializer.data.get('match_id')
-
             try:
                 match = Match.objects.get(id=match_id)
             except Match.DoesNotExist:
@@ -130,7 +74,6 @@ class SignForMatchView(viewsets.ViewSet):
             except MyUser.DoesNotExist:
                 return Response(status=status.HTTP_404_NOT_FOUND)
             
-            # check if match is full or user already signed in:
             try:
                 exists = match.players.get(id=user.id)
             except MyUser.DoesNotExist:
@@ -138,21 +81,14 @@ class SignForMatchView(viewsets.ViewSet):
 
             if (match.signed_players==match.max_players) or (exists!=None) or (match.date<timezone.now()):
                 return Response(MatchSerializer(match).data, status=status.HTTP_403_FORBIDDEN)
+
             match.players.add(user)
-            #user.user_matches.add(match)
             match.signed_players = match.signed_players + 1
             user.save()
             match.save()
-
-            # print("User matches:")
-            # for m in user.user_matches.all():
-            #     print(m)
-            # print("Players for m:")
-            # print(m)
-            # for p in match.players.all():
-            #     print(p)
         
         return Response(MatchSerializer(match).data, status=status.HTTP_201_CREATED)
+
 
 class SignOutFromMatchView(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
@@ -162,7 +98,6 @@ class SignOutFromMatchView(viewsets.ViewSet):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             match_id = serializer.data.get('match_id')
-
             try:
                 match = Match.objects.get(id=match_id)
             except Match.DoesNotExist:
@@ -173,28 +108,20 @@ class SignOutFromMatchView(viewsets.ViewSet):
             except MyUser.DoesNotExist:
                 return Response(status=status.HTTP_404_NOT_FOUND)
             
-            # check if match is full or user already signed in:
             try:
                 exists = match.players.get(id=user.id)
             except MyUser.DoesNotExist:
                 exists = None
 
             if (exists!=None) and (match.date>timezone.now() and (user!=match.organizer)):
-                # remove user from match
                 match.players.remove(user)
                 match.signed_players = match.signed_players - 1
                 match.save()
                 user.save()
                 return Response(MatchSerializer(match).data, status=status.HTTP_200_OK)
-            # print("User matches:")
-            # for m in user.user_matches.all():
-            #     print(m)
-            # print("Players for m:")
-            # print(m)
-            # for p in match.players.all():
-            #     print(p)
         
         return Response(MatchSerializer(match).data, status=status.HTTP_403_FORBIDDEN)
+
 
 class DeleteMatchView(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
@@ -204,7 +131,6 @@ class DeleteMatchView(viewsets.ViewSet):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             match_id = serializer.data.get('match_id')
-
             try:
                 match = Match.objects.get(id=match_id)
             except Match.DoesNotExist:
@@ -229,10 +155,11 @@ class PitchView(viewsets.ModelViewSet):
     serializer_class = PitchSerializer
     queryset = Pitch.objects.all()
 
-# Views for user
+
 class MyUserView(viewsets.ModelViewSet):
     serializer_class = MyUserSerializer
     queryset = MyUser.objects.all()
+
 
 class UserProfileView(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
@@ -247,17 +174,13 @@ class UserProfileView(viewsets.ModelViewSet):
         serializer = MyUserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+
 class EditUserProfileView(viewsets.ViewSet):
     permission_classes = [IsAuthenticated]
     serializer_class = EditMyUserSerializer
 
     def create(self, request, format=None):
         serializer = self.serializer_class(data=request.data)
-        # pitch = Pitch.objects.get(id=serializer.data.get('pitch'))
-        #     price = serializer.data.get('price')
-        #     date = serializer.data.get('date')
-        #     description = serializer.data.get('description')
-        #     max_players = serializer.data.get('max_players')
         if serializer.is_valid():
             try:
                 user = MyUser.objects.get(id=self.request.user.id)
@@ -268,18 +191,11 @@ class EditUserProfileView(viewsets.ViewSet):
             new_last_name = serializer.data.get('last_name')
             new_email = serializer.data.get('email')
             new_password = serializer.data.get('password')
-            #confirm_new_password = serializer.data.get('confirm_password')
-            
-            #if confirm_new_password != new_password:
-            #    return Response(serializer.data, status=status.HTTP_406_NOT_ACCEPTABLE)
 
             user.first_name = new_first_name
             user.last_name = new_last_name
             user.email = new_email
-            
-            # user.password = new_password
             user.set_password(new_password)
-
             user.save()
 
             return Response(MyUserSerializer(user).data, status=status.HTTP_200_OK)
