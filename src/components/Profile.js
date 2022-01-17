@@ -104,7 +104,7 @@ const Profile = () => {
                     {listOfMatches.map((match) => (
                 <div className='match-preview' key={match.id}>
                     { moment().isBefore(match.date)  ?
-                        <button className='match-date' onClick={handleDelete} data-arg1={match.id}> Data: {match.date.slice(0,10)} Godzina : {match.date.slice(11,16)}</button>
+                        <button className='match-date' onClick={handleDelete} data-arg1={match.id}> Data: {match.date.slice(0,10)} Godzina : {match.date.slice(11,16)} - ZREZYGNUJ</button>
                     :
                         <button className='match-date-past'> Data: {match.date.slice(0,10)} Godzina : {match.date.slice(11,16)}</button>
 }

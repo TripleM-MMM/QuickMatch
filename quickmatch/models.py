@@ -22,7 +22,6 @@ class Match(models.Model):
     def __str__(self):
         return "Match: " + self.description
 
-
 class Pitch(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
@@ -37,10 +36,10 @@ class Pitch(models.Model):
     def __str__(self):
         return "Pitch: " + self.name
 
-
 class MyUser(User):
     models.OneToOneField(User, on_delete=models.CASCADE)
     user_matches = models.ManyToManyField(to="Match", related_name="players", blank=True, null=True, symmetrical=True, editable=True, default=None)
+
 
 class MyUserInline(admin.StackedInline):
     model = MyUser

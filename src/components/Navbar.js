@@ -30,7 +30,7 @@ function Navbar() {
                 <Link to='/contact'>Kontakt</Link>  
             </div>
             <div className='status'>
-                {logged_in ? <Link to='/login'>Witaj {username} !</Link>: <Link to='/login'>Zaloguj się!</Link>}
+                {logged_in ? `Witaj ${username} !`: <Link to='/login'>Zaloguj się!</Link>}
             </div>
             <div className='login'>
                 <Link to='/login'>Zarejestruj się</Link>
