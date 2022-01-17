@@ -27,6 +27,7 @@ function Create() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const match = {pitch, price, date, description, max_players};
+        console.log(match)
         axios.post("/api/create_match/", match, {headers: {
             Authorization: `JWT ${localStorage.getItem('token')}`,
          }})
@@ -65,7 +66,7 @@ function Create() {
                     mobile
                     precision={ 2 } 
                     step={ 0.1 }
-                    min={ 0.1 } 
+                    min={ 0.0 } 
                     onChange={(value) => setPrice(value)}
                 />
                 <label>Data: </label>
@@ -89,9 +90,8 @@ function Create() {
                     required
                     strict
                     mobile
-                    min={ 2 } 
-                    precision={ 2 } 
-                    onChange={(value) => setMax_players(value)}
+                    min={ 1 } 
+                    onChange={(value) => setMax_players( parseInt(value)+1)}
                 />
                 <label></label>
                 <button className='add'>Dodaj wydarzenie</button>
