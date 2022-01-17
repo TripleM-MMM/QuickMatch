@@ -122,7 +122,7 @@ const MatchDetails = () => {
             />}
             {isOpen2 && <Popup
                 content={<>
-                    <b>Już dołączyłeś do tego wydarzenia !</b>
+                    <b>Już dołączyłeś do tego wydarzenia lub wszystkie miejsca zajęte!</b>
                     </>}
                     handleClose={togglePopup2}
             />}
